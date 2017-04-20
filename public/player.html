@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta name="viewport" content="width=device-width" /> -->
+<meta name="description" content="New Project" />
+  <meta name="keywords" content="New Project" />
+  <meta charset="utf-8">
+<title>Carcasonne</title>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link href="player.css" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" href="hamburger.css">
+ 	 <script type="text/javascript" src="main.js"></script>
+	 <script type="text/javascript" src="player.js"></script>
+ <link href="favicon.ico" rel="icon" type="image/png" />
+</head>
+<body onload="onload()">
+
+		<div id="player" >
+			<div id="top">
+				<label id="theQuestion" class="playerText"> 
+					<label onclick="test()" id="playerNumber" value="0"></label>
+				<div id="optionButtons">
+				</div>
+				
+				<label id="sent"  >Answer Sent</label>
+				<label id="result" >Result</label>
+			</div>
+		</div>
+		<div id="sound" >
+			<div id="nav-icon3">
+			  <span></span>
+			  <span></span>
+			  <span></span>
+			  <span></span>
+			</div>
+		</div>
+		 <div id="menu">
+					<input type="button" onclick="initReconnect()" value="Reconnect" > <br>
+					<div id="player1Stuff">
+					<!-- <input type="button" onclick="startGame('1')" value="Start 1 player game" > <br>
+					<input type="button" onclick="startGame('2')" value="Start 2 player game" > <br>
+					<input type="button" onclick="startGame('3')" value="Start 3 player game" > <br>
+					<input type="button" onclick="startGame('4')" value="Start 4 player game" > <br>
+					<input type="button" onclick="reroll()" value="Draw New Tile" > <br> -->
+<!--  					<input type="button" onclick="startGame('5')" value="Start 5 player game" > <br>
+					<input type="button" onclick="testTile('4')" value="new Tile"><br>
+					<input type="button" onclick="testPlaceMeeple()" value="place MEELPE" > <br>
+					<input type="button" onclick="testPlaceMeeple2()" value="show meeple some hidden" > <br>
+					<input type="button" onclick="testDone()" value="Test Done" > <br>  -->
+					</div>
+
+			</div> 
+			<div id="inputContainer" >
+				<canvas id="theCanvas"></canvas>
+				
+				<!-- <div id="waitingDiv">Waiting for someone else</div> -->
+			</div> 
+<!-- 	<div class="shape2"></div>
+	<div class="shape4"></div> -->
+
+</body>
+</html>

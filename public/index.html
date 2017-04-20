@@ -1,26 +1,80 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
-    <title>NodeJS Starter Application</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
-  </head>
-
-  <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1 id="message">Hello World!</h1>
-          <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-        </td>
-      </tr>
-    </table>
-  </body>
-
+<head>
+<!-- <meta name="viewport" content="width=device-width" /> -->
+<meta name="description" content="New Project" />
+  <meta name="keywords" content="New Project" />
+  <meta charset="utf-8">
+<title>Draw Game</title>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="main.js"></script>
+ <script type="text/javascript" src="functions.js"></script>
+ <link href="favicon.ico" rel="icon" type="image/png" />
+</head>
+<body onload="onload()">
+<div id="menuButton">
+<img onclick="toggleMenu()" src="img/settings.png"></img>
+</div>
+<div id="menubackground" onclick="toggleMenu()">
+	<div id="menuContainer">
+		<img id="closeButton" onclick="toggleMenu()" src="img/x.png">
+		<h1> Draw Game by KK</h1>
+		<p class="line"></p>
+		<input type="button" class="menuButton"  value="Start 2 Player Game" onclick="restartGame('2')"><br>
+		<input type="button" class="menuButton"  value="Start 3 Player Game" onclick="restartGame('3')"><br>
+		<input type="button" class="menuButton"  value="Start 4 Player Game" onclick="restartGame('4')"><br>
+		<p class="line"></p>
+		<input type="button" class="menuButton" value="Clear" onclick="clearCanvas()"><br>
+		<p><input type="checkbox"  id="cheatsCheck" value="Cheats" onclick=""> Cheats</P>
+		<p class="line"></p>
+		<p>Pick your player number by opening the links below:</p> 
+		<a href="/player#1">Player 1</a><br>
+		<a href="/player#2">Player 2</a><br>
+		<a href="/player#3">Player 3</a><br>
+		<a href="/player#4">Player 4</a> 
+	</div>
+</div>
+<div id="testButtons">
+<input type="button" style="height: 5vh; font-size:2em;"onclick="testDraw()" value="Test Draw">
+</div>
+<div id="info">	
+	Waiting for game to start
+</div>
+<div id="info2">	
+	Place Meeple
+</div>
+<div id="canvasContainer">
+<canvas height="500px" width="500px" id="theCanvas"></canvas>
+<div id="theImages" style="display:none">
+	<!-- <img src="img/mario1.png" id="mario1"> -->
+	<canvas height="70px" width="70px" id="tempCanvas"></canvas>
+	
+</div>
+</div>
+<div id="player1" class="playerInfo ">
+<h1>Player 1</h1>
+<input id="scoreTextPlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
+<input id="potentialTextPlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
+<input id="meeplePlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
+</div>
+<div id="player2" class="playerInfo ">
+<h1>Player 2</h1>
+<input id="scoreTextPlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
+<input id="potentialTextPlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
+<input id="meeplePlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
+</div>
+<div id="player3" class="playerInfo">
+<h1>Player 3</h1>
+<input id="scoreTextPlayer3" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
+<input id="potentialTextPlayer3" type="text" value="0"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
+<input id="meeplePlayer3" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
+</div>
+<div id="player4" class="playerInfo">
+<h1>Player 4</h1>
+<input id="scoreTextPlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
+<input id="potentialTextPlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
+<input id="meeplePlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
+</div>
+</body>
 </html>

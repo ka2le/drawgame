@@ -1,0 +1,202 @@
+body{
+	padding: 0px;
+	margin: 0px;
+	overflow:hidden;
+		font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+#canvasContainer{
+	position:absolute;
+	top: 0px;
+
+}
+#theCanvas{
+//position:absolute;
+	height:100vh;
+	width:100vw;
+//	border: 1px solid;
+}
+#mario1{
+	transform: rotate(90deg);
+
+}
+.playerInfo{
+	z-index:20;
+	padding: 30px;
+	position:absolute;
+	//display:none !important;
+	font-size:2em;
+	border-radius: 10px;
+	//box-shadow: 10px 14px 44px -5px rgba(0,0,0,0.35);
+}
+.playerInfo h1{
+}
+.scoreText{
+	background-color:rgba(0,0,0,0);
+	//font-size:2em;
+	border:none;
+	font-size:1em;
+	width:70px;
+	
+}
+#player1, #player2, #player3, #player4{
+	display:none;
+}
+#player1 h1, #player2 h1, #player3 h1, #player4 h1{
+	 padding: 0px;
+ margin:0px;
+}
+#player1{
+		top:130px;
+	left: 5px;
+	background-color:rgba(200,200,255,0.4);
+}
+#player1 h1{
+ color:blue;
+
+}
+.activePlayer1, .activePlayer2, .activePlayer3, .activePlayer4 {
+	font-size:2.2em;
+	box-shadow: 10px 14px 44px -5px rgba(0,0,0,0.75);
+	
+}
+.activePlayer1{
+	background-color:rgba(150,150,255,0.6) !important;
+}
+.activePlayer2{
+		background-color:rgba(255,100,100,0.6) !important;
+}
+.activePlayer3{
+	background-color:rgba(215,215,20,0.45) !important;
+}
+.activePlayer4{
+	background-color:rgba(100,225,100,0.5) !important;
+}
+
+#player2{
+		top:130px;
+	right: 5px;
+	background-color:rgba(255,200,200,0.4);
+}
+#player2 h1{
+ color:red;
+}
+#player3{
+		top:500px;
+	left: 5px;
+	background-color:rgba(215,215,20,0.25);
+}
+#player3 h1{
+ color:rgb(165, 165, 8);
+}
+#player4{
+		top:500px;
+	right: 5px;
+	background-color:rgba(200,255,200,0.5);
+}
+#player4 h1{
+ color:green;
+}
+#menuButton{
+	padding: 2vh;
+	z-index:23;
+	position:absolute;
+	top:0px;
+	right:0px;
+
+}
+#menubackground{
+	position:absolute;
+	z-index:25;
+	height:100vh;
+	width:100vw;
+	display:none;
+	background-color: rgba(0,0,0,0.3);
+}
+#menuContainer{
+	background-color:rgb(30,30,30);
+	position:absolute;
+	width:30vw;
+	left: 30vw;
+	top:5vh;
+	min-height:70vh;
+	z-index:27;
+	border-radius:2vh;
+	text-align:center;
+	color:white;
+	min-width:400px;
+//	padding-top: 5vh;
+	//padding-left: 5vw;
+	//padding-right: 5vw;
+	padding:5vh;
+	font-size:1.5em;
+	//overflow:auto;
+	//font-weight: bold;
+}
+#menuContainer input, #menuContainer a{
+	color:white;
+	font-size:1.2em;
+	background-color:rgba(0,0,0,0);
+	margin-top:0.5vh;
+	margin-bottom:0.5vh;
+	
+	border: none;
+	text-decoration: none;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+.line{
+	height:2px;
+	background-color:white;
+	width:100%;
+	//margin-left: 15%;
+}
+#menuContainer input:hover, #menuButton img:hover, #closeButton:hover{
+	cursor:pointer;
+}
+#menuButton img{
+	height:9vh;
+	width:9vh;
+}
+#closeButton{
+	position:absolute;
+	right: -30px;
+	top: -30px;	
+	height:9vh;
+	width:9vh;
+}
+
+#info{
+	position:absolute;
+	z-index:21;
+	width:100vw;
+	font-size:3em;
+	bottom:2vh;
+	text-align:center;
+	color:black;
+	
+}
+#info2{
+	position:absolute;
+	z-index:21;
+	width:100vw;
+	font-size:3em;
+	top:2vh;
+	text-align:center;
+	color:black;
+	display:none;
+}
+
+#testButtons{
+	position:absolute;
+	z-index:10;
+	//display:none;
+
+}
