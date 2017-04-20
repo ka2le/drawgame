@@ -30,7 +30,15 @@ function reconnect(){
 }
 function send(intent, value, value2){
 	if(window.location.host=="localhost:4330" || window.location.host=="localhost"){
-
+			/* console.log("sent");
+			var message = {
+			intent: intent,
+			  value: value,
+			  value2: value2,
+			  sender: role,
+			  playerNumber: playerNumber
+			};
+			handleInput(message); */
 	}else{
 			var message = {
 			intent: intent,

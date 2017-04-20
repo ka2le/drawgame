@@ -7,8 +7,8 @@ var teamColors = ["blue", "red", "yellow", "green", "black"];
 var cheatsOn = false;
 var canvas;
 var ctx;
-var canvasWidth;
-var canvasHeight;
+var canvasWidth =1200;
+var canvasHeight = 800;
 var drawColor;
 var lastX;
 var lastY;
@@ -43,6 +43,8 @@ function resetVariables(){
 	lineWidth =4;
 	drawColor = "black";
 	players = [];
+	userWidth = canvasWidth;
+	userHeight = canvasHeight;
 }
 
 function clearCanvas(){
@@ -167,6 +169,7 @@ function handleInput(data){
 	if(intent=="DrawMessage"){
 		var value = data.value;
 		handleDrawMessage(value);
+		//console.log("drawing");
 	}else{
 		console.log("intent" + intent);
 		//console.log();
@@ -184,6 +187,7 @@ function handleInput(data){
 		if(intent=="userCanvas"){
 			userWidth = data.value;
 			userHeight = data.value2;
+			console.log(userWidth+"<userWidth userHeight>"+userHeight);
 		}
 	}
 	
