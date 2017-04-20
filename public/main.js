@@ -40,6 +40,7 @@ function send(intent, value, value2){
 	}else{
 		if(intent=="DrawMessage"){
 			socket.send(value);
+			
 		}else{
 			var message = {
 			intent: intent,
@@ -54,16 +55,17 @@ function send(intent, value, value2){
 }
 
 function doSocketMessage( message ) {
+	console.log(message.length);
 	if(message.length == 8){
 		handleDrawMessage(message);
 		//console.log("DrawMessage");
 	}else{
 	  console.log("doSocketMessage");
 	  // Parse
-	  var data = JSON.parse( message.data );
+	 /*  var data = JSON.parse( message.data );
 	  var intent = data.intent;
 	  //console.log(intent);
-	  handleInput(data);
+	  handleInput(data); */
 	}
 }
 

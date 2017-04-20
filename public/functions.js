@@ -78,7 +78,7 @@ function findxy(res, e) {
 			lastX = currX;
 			lastY = currY;
             flag = true;
-			sendCurrentXY();
+			//sendCurrentXY();
         }
         if (res == 'up' || res == "out") {
             flag = false;	
@@ -87,7 +87,8 @@ function findxy(res, e) {
             if (flag) {
                 currX = e.clientX - canvas.offsetLeft;
                 currY = e.clientY - canvas.offsetTop;
-				sendCurrentXY();
+				//sendCurrentXY();
+				draw();
             }
         }
     }

@@ -103,6 +103,7 @@ function findxy(res, e) {
 function sendCurrentXY(){
 	var value = addZeroes(currX)+""+addZeroes(currY);
 	send("DrawMessage", value);
+	console.log(value.length);
 	draw();
 }
 function addZeroes (str) {
