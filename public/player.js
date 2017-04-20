@@ -29,6 +29,7 @@ function onload(){
 	initCanvasVariables();
 	initJquery();
 	initCommonJquery();
+	document.body.requestFullscreen();
 }
 function continueOnload(){
 	//$("#sent").hide();
