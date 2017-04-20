@@ -57,13 +57,13 @@ function send(intent, value, value2){
 
 function doSocketMessage( message ) {
 	//	console.log("message");
-	console.log(message);
+	//console.log(message);
 	//console.log(message.length);
-	i/* f(message.length == 999999999){
+	/*if(message.length == 999999999){
 		handleDrawMessage(message);
 		//console.log("DrawMessage");
 	}else{ */
-	  console.log("doSocketMessage");
+	  //console.log("doSocketMessage");
 	  // Parse
 	  var data = JSON.parse( message.data );
 	  var intent = data.intent;
