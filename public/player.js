@@ -30,7 +30,7 @@ function onload(){
 	initJquery();
 	initCommonJquery();
 	//document.body.requestFullscreen();
-	window.scrollTo(0,1);
+	window.scrollTo(0,100);
 	console.log("canvasWidth "+canvasWidth);
 	console.log("canvasHeight "+canvasHeight);
 	

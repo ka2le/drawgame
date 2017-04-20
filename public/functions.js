@@ -32,7 +32,9 @@ function onload(){
 	//draw();
 	//clearCanvas();
 	//draw(100,540);
+	testValues();
 }
+
 function continueOnload(){
 	//console.log("continueOnload does nothing now on host.");
 	send("hostLoaded");
@@ -154,11 +156,21 @@ function hideMenu(){
 function handleReconnect(){
 
 }
+function testValues(){
+	console.log("testValues()");
+	console.log("canvasWidth "+canvasWidth);
+	var xFromPhone = 500;
+	var phoneWidht = 1000;
+	var relation = xFromPhone/phoneWidht;
+	console.log("relation "+relation);
+	var newX = canvasWidth*relation;
+	console.log("newX "+newX);
+}
 function handleDrawMessage(message){
 	var inputX = parseInt(message.substring(0, 4));
 	var inputY = parseInt(message.substring(4, 8));
-	var currX = (inputX/userWidth)*canvasWidth;
-	var currY = (inputY/userHeight)*canvasHeight;
+	currX = (inputX/userWidth)*canvasWidth;
+	currY = (inputY/userHeight)*canvasHeight;
 	draw();
 }
 function handleInput(data){

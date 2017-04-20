@@ -74,8 +74,8 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 #sound{
 	position:absolute;
-	top:1vh;
-	right: 1vw;
+	top:2vh;
+	right: 2vh;
 	z-index:11;
 	//height:20vh;
 }
