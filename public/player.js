@@ -136,6 +136,7 @@ function handleInput(data){
 		/* document.getElementById("result").innerHTML = "Reconnected to host. Waiting...";
 		document.getElementById("result").style.display = "block"; */
 	}
+	
 }
 
 function initReconnect(){

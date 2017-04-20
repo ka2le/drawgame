@@ -182,6 +182,10 @@ function handleInput(data){
 	var intent = data.intent;
 	if(intent=="reconnect" || intent=="iAmReady"){
 	
+	}
+	if(intent=="DrawMessage"{
+		var value = data.value;
+		handleDrawMessage(value);
 	}	
 }
 
