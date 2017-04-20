@@ -61,29 +61,7 @@ function draw(){
 
 function findxy(res, e) {
         if (res == 'down') {
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
-			lastX = currX;
-			lastY = currY;
-            flag = true;
-			var value = addZeroes(currX)+""+addZeroes(currY);
-			send("start", value);
-			sendCurrentXY();
-        }
-        if (res == 'up' || res == "out") {
-            flag = false;
-			send("stop");
-        }
-        if (res == 'move') {
-            if (flag) {
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
-				sendCurrentXY();
-            }
-        }
-    }
-function findxy2(res, e) {
-        if (res == 'down') {
+			
             currX = e.clientX - canvas.offsetLeft;
             currY = e.clientY - canvas.offsetTop;
 			lastX = currX;
@@ -183,6 +161,7 @@ function initJquery(){
             findxy('move', e.changedTouches[0])
         }, false);
         canvas.addEventListener("touchstart", function (e) {
+			e.preventDefault();
             findxy('down', e.changedTouches[0])
         }, false);
 		canvas.addEventListener("touchend", function (e) {
