@@ -39,6 +39,7 @@ function send(intent, value, value2){
 	//	console.log("sending diabled beacause Localhost. Message:"+ intent+" value: "+value);
 	}else{
 		if(intent=="DrawMessage"){
+			console.log("sending" +value)
 			socket.send(value);
 			
 		}else{
@@ -55,6 +56,8 @@ function send(intent, value, value2){
 }
 
 function doSocketMessage( message ) {
+		console.log("message");
+	console.log(message);
 	console.log(message.length);
 	if(message.length == 8){
 		handleDrawMessage(message);
