@@ -168,7 +168,7 @@ function testValues(){
 }
 function handleDrawMessage(message){
 	currX = translateUserXY(message)[0];
-	currY = translateUserXY(message)[1];
+	currY = (translateUserXY(message)[1];
 	draw();
 }
 function translateUserXY(text){
@@ -192,8 +192,8 @@ function handleInput(data){
 		//console.log();
 		if(intent=="start"){
 			flag = true;
-			lastX = translateUserXY(message)[0];
-			lastY = translateUserXY(message)[1];
+			lastX = translateUserXY(data.value)[0];
+			lastY = translateUserXY(data.value)[0];
 		}
 		if(intent=="stop"){
 			flag = false;
