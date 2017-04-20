@@ -33,12 +33,13 @@ function onload(){
 	window.scrollTo(0,1);
 	console.log("canvasWidth "+canvasWidth);
 	console.log("canvasHeight "+canvasHeight);
-	send("userCanvas", canvasWidth, canvasHeight);
+	
 }
 function continueOnload(){
 	//$("#sent").hide();
 	console.log("continueOnload");
 	iAmReady();
+	send("userCanvas", canvasWidth, canvasHeight);
 	//waitForOthers();
 }
 
