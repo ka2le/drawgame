@@ -25,6 +25,7 @@ function onload(){
 	resetVariables();
 	initCanvasVariables();
 	jQueryInits();
+	initCommonJquery();
 	//draw();
 	//clearCanvas();
 	//draw(100,540);
@@ -40,37 +41,10 @@ function resetVariables(){
 	drawColor = "black";
 	players = [];
 }
-function initCanvasVariables(){
-	canvas = document.getElementById("theCanvas");
-	ctx = canvas.getContext('2d');
-	ctx.globalCompositeOperation = 'source-over';
-	canvasWidth = document.documentElement.clientWidth;
-	canvasHeight = document.documentElement.clientHeight;
-	canvas.height = canvasHeight;
-	canvas.width = canvasWidth;
-	ctx.lineWidth=lineWidth;
-	ctx.fillStyle = drawColor;
-}
-function updateCanvasVariables(){
-	canvas.height = canvasHeight;
-	canvas.width = canvasWidth;
-	ctx.lineWidth=lineWidth;
-	ctx.fillStyle = drawColor;
-}
+
 
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
-function draw(){
-	ctx.beginPath();
-	ctx.moveTo(lastX,lastY);
-	ctx.lineTo(currX,currY);
-	ctx.stroke();
-	lastX = currX;
-	lastY = currY;
 
-}
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-}
 function findxy(res, e) {
         if (res == 'down') {
             currX = e.clientX - canvas.offsetLeft;
@@ -97,10 +71,7 @@ function sendCurrentXY(){
 	var value = addZeroes(currX)+""+addZeroes(currY);
 	send("DrawMessage", value);
 }
-function addZeroes (str) {
-  str = str.toString();
-  return str.length < 4 ? addZeroes("0" + str, 4) : str;
-}	
+	
 //------------------------------------------------Jquery----------------------------------------------------------------------------------------------------------------------------------------------
 
 function jQueryInits(){
@@ -127,9 +98,7 @@ function jQueryInits(){
 			disableCheats();
 		}
     });
-	$(".menuButton").click(function() {
-        toggleMenu();
-    });
+
 	$('.scoreText').change(function() { 
 		insertCheatScore();
 	});	
@@ -194,7 +163,10 @@ function handleInput(data){
 	}
 	if(intent=="stop"){
 		flag = false;
-	}		
+	}
+	if(intent=="clear"){
+		clearCanvas();
+	}	
 }
 
 

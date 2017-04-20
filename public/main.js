@@ -30,19 +30,8 @@ function reconnect(){
 }
 function send(intent, value, value2){
 	if(window.location.host=="localhost:4330" || window.location.host=="localhost"){
-	//if(window.location.host=="diabled"){
-		/* if(intent=="DrawMessage"){
-			//socket.send(value);
-		//	console.log("sending draw data");
-			doSocketMessage(value);
-		} */
-	//	console.log("sending diabled beacause Localhost. Message:"+ intent+" value: "+value);
+
 	}else{
-	/* 	if(intent=="DrawMessage"){
-			console.log("sending" +value)
-			socket.send(value);
-			
-		}else{ */
 			var message = {
 			intent: intent,
 			  value: value,
@@ -52,23 +41,67 @@ function send(intent, value, value2){
 			};
 			socket.send( JSON.stringify( message ) );	
 		}
-	//}
 }
 
 function doSocketMessage( message ) {
-	//	console.log("message");
-	//console.log(message);
-	//console.log(message.length);
-	/*if(message.length == 999999999){
-		handleDrawMessage(message);
-		//console.log("DrawMessage");
-	}else{ */
-	  //console.log("doSocketMessage");
-	  // Parse
 	  var data = JSON.parse( message.data );
 	  var intent = data.intent;
-	  //console.log(intent);
 	  handleInput(data); 
-	//}
 }
 
+
+
+
+//------------------------------------------------Canvas----------------------------------------------------------------------------------------------------------------------------------------------
+function draw(){
+	ctx.beginPath();
+	ctx.moveTo(lastX,lastY);
+	ctx.lineTo(currX,currY);
+	ctx.stroke();
+	lastX = currX;
+	lastY = currY;
+}
+
+function initCommonJquery(){
+		$(".menuButton").click(function() {
+        toggleMenu();
+    });
+	$(window).resize(function () {
+		updateCanvasSize();
+	});
+
+}
+
+function initCanvasVariables(){
+	canvas = document.getElementById("theCanvas");
+	ctx = canvas.getContext('2d');
+	ctx.globalCompositeOperation = 'source-over';
+	canvasWidth = document.documentElement.clientWidth;
+	canvasHeight = document.documentElement.clientHeight;
+	canvas.height = canvasHeight;
+	canvas.width = canvasWidth;
+	ctx.lineWidth=lineWidth;
+	ctx.fillStyle = drawColor;
+}
+function updateCanvasVariables(){
+	canvas.height = canvasHeight;
+	canvas.width = canvasWidth;
+	ctx.lineWidth=lineWidth;
+	ctx.fillStyle = drawColor;
+}
+function updateCanvasSize(){
+	canvasWidth = document.documentElement.clientWidth;
+	canvasHeight = document.documentElement.clientHeight;
+	canvas.height = canvasHeight;
+	canvas.width = canvasWidth;
+}
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	send("clear");
+}
+
+//---------------------------------------------Other---------------------------------------------------------------------------------------------------------------------------------------------------------
+function addZeroes (str) {
+  str = str.toString();
+  return str.length < 4 ? addZeroes("0" + str, 4) : str;
+}

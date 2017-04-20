@@ -28,6 +28,7 @@ function onload(){
 	resetVariables();
 	initCanvasVariables();
 	initJquery();
+	initCommonJquery();
 }
 function continueOnload(){
 	//$("#sent").hide();
@@ -44,24 +45,6 @@ function resetVariables(){
 	drawColor = "black";
 	players = [];
 }
-function initCanvasVariables(){
-	canvas = document.getElementById("theCanvas");
-	ctx = canvas.getContext('2d');
-	ctx.globalCompositeOperation = 'source-over';
-	canvasWidth = document.documentElement.clientWidth;
-	canvasHeight = document.documentElement.clientHeight;
-	canvas.height = canvasHeight;
-	canvas.width = canvasWidth;
-	ctx.lineWidth=lineWidth;
-	ctx.fillStyle = drawColor;
-}
-function updateCanvasVariables(){
-	canvas.height = canvasHeight;
-	canvas.width = canvasWidth;
-	ctx.lineWidth=lineWidth;
-	ctx.fillStyle = drawColor;
-}
-
 
 
 
@@ -75,9 +58,7 @@ function draw(){
 	lastY = currY;
 
 }
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-}
+
 function findxy(res, e) {
         if (res == 'down') {
             currX = e.clientX - canvas.offsetLeft;
@@ -101,7 +82,29 @@ function findxy(res, e) {
             }
         }
     }
-
+function findxy2(res, e) {
+        if (res == 'down') {
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+			lastX = currX;
+			lastY = currY;
+            flag = true;
+			var value = addZeroes(currX)+""+addZeroes(currY);
+			send("start", value);
+			sendCurrentXY();
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+			send("stop");
+        }
+        if (res == 'move') {
+            if (flag) {
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+				sendCurrentXY();
+            }
+        }
+    }
 
 function sendCurrentXY(){
 	var value = addZeroes(currX)+""+addZeroes(currY);
@@ -167,6 +170,18 @@ function initJquery(){
             findxy('up', e)
         }, false);
         canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
+		canvas.addEventListener("touchmove", function (e) {
+            findxy('move', e.changedTouches[0])
+        }, false);
+        canvas.addEventListener("touchstart", function (e) {
+            findxy('down', e.changedTouches[0])
+        }, false);
+		canvas.addEventListener("touchend", function (e) {
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("touchcancel", function (e) {
             findxy('out', e)
         }, false);
 	$( "#menuContainer" ).click(function( event ) {

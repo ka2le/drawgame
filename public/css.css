@@ -197,6 +197,6 @@ input[type=checkbox]
 #testButtons{
 	position:absolute;
 	z-index:10;
-	//display:none;
+	display:none;
 
 }

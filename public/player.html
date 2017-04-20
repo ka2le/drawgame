@@ -36,7 +36,8 @@
 			</div>
 		</div>
 		 <div id="menu">
-					<input type="button" onclick="initReconnect()" value="Reconnect" > <br>
+					<!-- <input type="button" onclick="initReconnect()" value="Reconnect" > <br> -->
+					<input type="button" class="menuButton" onclick="clearCanvas()" value="Clear" > <br>
 					<div id="player1Stuff">
 					<!-- <input type="button" onclick="startGame('1')" value="Start 1 player game" > <br>
 					<input type="button" onclick="startGame('2')" value="Start 2 player game" > <br>
@@ -52,7 +53,7 @@
 
 			</div> 
 			<div id="inputContainer" >
-				<canvas id="theCanvas"></canvas>
+				<canvas id="theCanvas" class="no-zoom"></canvas>
 				
 				<!-- <div id="waitingDiv">Waiting for someone else</div> -->
 			</div> 
