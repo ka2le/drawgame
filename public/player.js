@@ -29,7 +29,11 @@ function onload(){
 	initCanvasVariables();
 	initJquery();
 	initCommonJquery();
-	document.body.requestFullscreen();
+	//document.body.requestFullscreen();
+	window.scrollTo(0,1);
+	console.log("canvasWidth "+canvasWidth);
+	console.log("canvasHeight "+canvasHeight);
+	send("userCanvas", canvasWidth, canvasHeight);
 }
 function continueOnload(){
 	//$("#sent").hide();
@@ -187,5 +191,19 @@ function toggleMenu(){
 		}else{
 			$("#menu").slideDown(200);
 		}
+}
+function toggleFullScreen() {
+  var doc = window.document;
+  var docEl = doc.documentElement;
+
+  var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+  var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+  if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    requestFullScreen.call(docEl);
+  }
+  else {
+    cancelFullScreen.call(doc);
+  }
 }
 //--------------------------------------------Test-------------------------------------

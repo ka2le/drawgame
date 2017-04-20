@@ -15,6 +15,9 @@ var lastY;
 var currX =300;
 var currY =500;
 var flag = false;
+var userWidth;
+var userHeight;
+
 
 var lineWidth;
 function onload(){
@@ -150,8 +153,10 @@ function handleReconnect(){
 
 }
 function handleDrawMessage(message){
-	currX = parseInt(message.substring(0, 4));
-	currY = parseInt(message.substring(4, 8));
+	var inputX = parseInt(message.substring(0, 4));
+	var inputY = parseInt(message.substring(4, 8));
+	var currX = (inputX/userWidth)*canvasWidth;
+	var currY = (inputY/userHeight)*canvasHeight;
 	draw();
 }
 function handleInput(data){
@@ -175,7 +180,11 @@ function handleInput(data){
 		}
 		if(intent=="clear"){
 			clearCanvas();
-		}	
+		}
+		if(intent=="userCanvas"){
+			userWidth = data.value;
+			userHeight = data.value2;
+		}
 	}
 	
 }
