@@ -167,11 +167,16 @@ function testValues(){
 	console.log("newX "+newX);
 }
 function handleDrawMessage(message){
-	var inputX = parseInt(message.substring(0, 4));
-	var inputY = parseInt(message.substring(4, 8));
-	currX = (inputX/userWidth)*canvasWidth;
-	currY = (inputY/userHeight)*canvasHeight;
+	currX = translateUserXY(message)[0];
+	currY = (translateUserXY(message)[1];
 	draw();
+}
+function translateUserXY(text){
+	var inputX = parseInt(text.substring(0, 4));
+	var inputY = parseInt(text.substring(4, 8));
+	var newX = (inputX/userWidth)*canvasWidth;
+	var newY = (inputY/userHeight)*canvasHeight;
+	return [newX,newY];
 }
 function handleInput(data){
 	var intent = data.intent;
@@ -187,8 +192,8 @@ function handleInput(data){
 		//console.log();
 		if(intent=="start"){
 			flag = true;
-			lastX = parseInt(data.value.substring(0, 4));
-			lastY = parseInt(data.value.substring(4, 8));
+			lastX = translateUserXY(message)[0];
+			lastY = translateUserXY(message)[1];
 		}
 		if(intent=="stop"){
 			flag = false;
