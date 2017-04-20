@@ -101,6 +101,10 @@ function jQueryInits(){
 			disableCheats();
 		}
     });
+	$(window).resize(function () {
+		updateCanvasSize();
+		send("canvasSize", canvasWidth, canvasHeight);
+	});
 
 	$('.scoreText').change(function() { 
 		insertCheatScore();

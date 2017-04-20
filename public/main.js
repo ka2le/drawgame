@@ -66,9 +66,7 @@ function initCommonJquery(){
 		$(".menuButton").click(function() {
         toggleMenu();
     });
-	$(window).resize(function () {
-		updateCanvasSize();
-	});
+	
 
 }
 
