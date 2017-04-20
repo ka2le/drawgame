@@ -37,7 +37,7 @@ function continueOnload(){
 function resetVariables(){
 	lastX = 0;
 	lastY = 0;
-	lineWidth =2;
+	lineWidth =4;
 	drawColor = "black";
 	players = [];
 }
@@ -153,7 +153,7 @@ function handleDrawMessage(message){
 function handleInput(data){
 	var intent = data.intent;
 	if(intent=="reconnect" || intent=="iAmReady"){
-	
+		send("canvasSize", canvasWidth, canvasHeight);
 	}
 	if(intent=="DrawMessage"){
 		var value = data.value;

@@ -41,7 +41,7 @@ function continueOnload(){
 function resetVariables(){
 	lastX = 0;
 	lastY = 0;
-	lineWidth =2;
+	lineWidth =5;
 	drawColor = "black";
 	players = [];
 }
@@ -139,7 +139,11 @@ function handleInput(data){
 		console.log("host loaded");
 		iAmReady();
 	}
-	
+	if(intent=="canvasSize"){
+		canvasSize = data.value;
+		canvasHeight = data.value2;
+		updateCanvasVariables();
+	}
 }
 
 function initReconnect(){
