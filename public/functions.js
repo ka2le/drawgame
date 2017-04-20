@@ -186,7 +186,15 @@ function handleInput(data){
 	if(intent=="DrawMessage"){
 		var value = data.value;
 		handleDrawMessage(value);
-	}	
+	}
+	if(intent=="start"){
+		flag = true;
+		lastX = parseInt(data.value.substring(0, 4));
+		lastY = parseInt(data.value.substring(4, 8));
+	}
+	if(intent=="stop"){
+		flag = false;
+	}		
 }
 
 

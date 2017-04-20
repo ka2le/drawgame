@@ -85,10 +85,13 @@ function findxy(res, e) {
 			lastX = currX;
 			lastY = currY;
             flag = true;
+			var value = addZeroes(currX)+""+addZeroes(currY);
+			send("start", value);
 			sendCurrentXY();
         }
         if (res == 'up' || res == "out") {
-            flag = false;	
+            flag = false;
+			send("stop");
         }
         if (res == 'move') {
             if (flag) {
@@ -103,7 +106,7 @@ function findxy(res, e) {
 function sendCurrentXY(){
 	var value = addZeroes(currX)+""+addZeroes(currY);
 	send("DrawMessage", value);
-	console.log(value.length);
+	//console.log(value.length);
 	draw();
 }
 function addZeroes (str) {
@@ -124,17 +127,11 @@ function iAmReady(){
 }
 
 function handleInput(data){
-	console.log(" handleInput(data)");
-	console.log(data);
 	var intent = data.intent;
-	console.log(intent);
 	if(intent=="hostLoaded" && playerNumber != null){
 		started = false;
 		console.log("host loaded");
-		//document.getElementById("playerNumber").innerHTML = ("Player: "+(playerNumber+1));
 		iAmReady();
-		/* document.getElementById("result").innerHTML = "Reconnected to host. Waiting...";
-		document.getElementById("result").style.display = "block"; */
 	}
 	
 }
