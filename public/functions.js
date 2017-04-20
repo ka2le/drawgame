@@ -103,7 +103,7 @@ function jQueryInits(){
     });
 	$(window).resize(function () {
 		updateCanvasSize();
-		send("canvasSize", canvasWidth, canvasHeight);
+		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 
 	$('.scoreText').change(function() { 
@@ -157,7 +157,7 @@ function handleDrawMessage(message){
 function handleInput(data){
 	var intent = data.intent;
 	if(intent=="reconnect" || intent=="iAmReady"){
-		send("canvasSize", canvasWidth, canvasHeight);
+		//send("canvasSize", canvasWidth, canvasHeight);
 	}
 	if(intent=="DrawMessage"){
 		var value = data.value;
