@@ -67,7 +67,8 @@ function findxy(res, e) {
 			lastX = currX;
 			lastY = currY;
             flag = true;
-			var value = addZeroes(currX)+""+addZeroes(currY);
+			var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
+			
 			send("start", value);
 			sendCurrentXY();
         }
