@@ -105,11 +105,14 @@ function findxy2(res, e) {
             }
         }
     }
-
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	send("clear");
+}
 function sendCurrentXY(){
-	var value = addZeroes(currX)+""+addZeroes(currY);
+	var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
 	send("DrawMessage", value);
-	//console.log(value.length);
+	console.log(value);
 	draw();
 }
 function addZeroes (str) {

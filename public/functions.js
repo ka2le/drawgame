@@ -42,7 +42,10 @@ function resetVariables(){
 	players = [];
 }
 
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 
+}
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
 
 function findxy(res, e) {
@@ -155,18 +158,22 @@ function handleInput(data){
 	if(intent=="DrawMessage"){
 		var value = data.value;
 		handleDrawMessage(value);
+	}else{
+		console.log("intent" + intent);
+		//console.log();
+		if(intent=="start"){
+			flag = true;
+			lastX = parseInt(data.value.substring(0, 4));
+			lastY = parseInt(data.value.substring(4, 8));
+		}
+		if(intent=="stop"){
+			flag = false;
+		}
+		if(intent=="clear"){
+			clearCanvas();
+		}	
 	}
-	if(intent=="start"){
-		flag = true;
-		lastX = parseInt(data.value.substring(0, 4));
-		lastY = parseInt(data.value.substring(4, 8));
-	}
-	if(intent=="stop"){
-		flag = false;
-	}
-	if(intent=="clear"){
-		clearCanvas();
-	}	
+	
 }
 
 

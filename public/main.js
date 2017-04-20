@@ -95,10 +95,7 @@ function updateCanvasSize(){
 	canvas.height = canvasHeight;
 	canvas.width = canvasWidth;
 }
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-	send("clear");
-}
+
 
 //---------------------------------------------Other---------------------------------------------------------------------------------------------------------------------------------------------------------
 function addZeroes (str) {
