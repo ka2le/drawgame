@@ -193,7 +193,7 @@ function handleInput(data){
 		if(intent=="start"){
 			flag = true;
 			lastX = translateUserXY(data.value)[0];
-			lastY = translateUserXY(data.value)[0];
+			lastY = translateUserXY(data.value)[1];
 		}
 		if(intent=="stop"){
 			flag = false;
