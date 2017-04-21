@@ -6,8 +6,8 @@
 /* Icon 1 */
 
 #nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4 {
-  width: 5vh;
-  min-width: 5vw;
+  //width: 7vh;
+  min-width: 7vw;
   height: 4.5vh;
   position: relative;
   //margin: 50px auto;
@@ -48,11 +48,11 @@
 }
 
 #nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
-  top: 2vh;
+  top: 3vh;
 }
 
 #nav-icon3 span:nth-child(4) {
-  top: 4vh;
+  top: 6vh;
 }
 
 #nav-icon3.open span:nth-child(1) {

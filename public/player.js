@@ -33,6 +33,7 @@ function onload(){
 	window.scrollTo(0,100);
 	console.log("canvasWidth "+canvasWidth);
 	console.log("canvasHeight "+canvasHeight);
+	//draw();
 	
 }
 function continueOnload(){
@@ -51,11 +52,26 @@ function resetVariables(){
 	drawColor = "black";
 	players = [];
 }
+function changeDrawSize(width){
+	console.log("changeDrawSize");
+	lineWidth= width;
+	ctx.lineWidth=lineWidth;
+	send("changeDrawSize",lineWidth );
+}
 
-
-
+function changeDrawColor(color){
+	//console.log("changeDrawColor");
+	//console.log(theButton);
+	//drawColor = theButton.style.backgroundColor;
+	drawColor= $("."+color).css("background-color");
+	//console.log(drawColor);
+	ctx.strokeStyle = drawColor;
+	//console.log(ctx.fillStyle );
+	send("changeDrawColor",drawColor );
+}
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
 function draw(){
+	
 	ctx.beginPath();
 	ctx.moveTo(lastX,lastY);
 	ctx.lineTo(currX,currY);
@@ -97,7 +113,7 @@ function clearCanvas(){
 function sendCurrentXY(){
 	var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
 	send("DrawMessage", value);
-	console.log(value);
+	//console.log(value);
 	draw();
 }
 function addZeroes (str) {
@@ -141,6 +157,7 @@ function handleReconnect(){
 }
 
 //------------------------------------------------Jquery inits----------------------------------------------------------------------------------------------------------------------------------------------
+var stepValue = 0;
 function initJquery(){
 	$('.no-zoom').bind('touchend', function(e) {
 	  e.preventDefault();
@@ -149,7 +166,8 @@ function initJquery(){
 	  // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
 	})
 
-	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
+	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4,#sound').click(function(event){
+		event.stopPropagation();
 		toggleMenu();
 	});
 	canvas.addEventListener("mousemove", function (e) {
@@ -165,7 +183,7 @@ function initJquery(){
             findxy('out', e)
         }, false);
 		canvas.addEventListener("touchmove", function (e) {
-            findxy('move', e.changedTouches[0])
+			findxy('move', e.changedTouches[0])
         }, false);
         canvas.addEventListener("touchstart", function (e) {
 			e.preventDefault();
@@ -180,6 +198,10 @@ function initJquery(){
 	$( "#menuContainer" ).click(function( event ) {
 		event.stopPropagation();
 		// Do something
+	});
+		$(window).resize(function () {
+		updateCanvasSize();
+		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
 

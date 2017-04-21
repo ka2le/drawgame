@@ -53,6 +53,15 @@ function clearCanvas(){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 
 }
+function changeDrawSize(width){
+
+	lineWidth= width;
+	ctx.lineWidth=lineWidth;
+}
+function changeDrawColor(rgb){
+			drawColor = rgb;
+			ctx.strokeStyle = drawColor;
+		}
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
 
 function findxy(res, e) {
@@ -206,6 +215,13 @@ function handleInput(data){
 			userHeight = data.value2;
 			console.log(userWidth+"<userWidth userHeight>"+userHeight);
 		}
+		if(intent=="changeDrawSize"){
+			changeDrawSize(data.value);
+		}
+		if(intent=="changeDrawColor"){
+			changeDrawColor(data.value);
+		}
+		
 	}
 	
 }

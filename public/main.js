@@ -81,13 +81,15 @@ function initCommonJquery(){
 function initCanvasVariables(){
 	canvas = document.getElementById("theCanvas");
 	ctx = canvas.getContext('2d');
-	ctx.globalCompositeOperation = 'source-over';
+	//ctx.globalCompositeOperation = 'source-over';
 	canvasWidth = document.documentElement.clientWidth;
 	canvasHeight = document.documentElement.clientHeight;
 	canvas.height = canvasHeight;
+	ctx.lineJoin = "round";
 	canvas.width = canvasWidth;
 	ctx.lineWidth=lineWidth;
 	ctx.fillStyle = drawColor;
+	ctx.strokeStyle = drawColor;
 }
 function updateCanvasVariables(){
 	canvas.height = canvasHeight;

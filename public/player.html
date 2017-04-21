@@ -5,7 +5,7 @@
 <meta name="description" content="New Project" />
   <meta name="keywords" content="New Project" />
   <meta charset="utf-8">
-<title>Carcasonne</title>
+<title>Draw Game</title>
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <link href="player.css" rel="stylesheet" type="text/css" />
@@ -15,6 +15,12 @@
  <link href="favicon.ico" rel="icon" type="image/png" />
 </head>
 <body onload="onload()">
+	<div id="rotate">Please rotate your device
+	<br>
+	<br>
+	<br>
+	<img src="img/rotate.png"></img>
+	</div>
 	<label onclick="" id="playerNumber" value="0"></label>
 		
 		<div id="sound" >
@@ -45,6 +51,19 @@
 
 			</div> 
 			<div id="inputContainer" >
+				<div id="sideMenu">
+					
+					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="|">
+					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="|">
+					<input type="button" class="sideMenuButton no-zoom red" onclick="changeDrawColor('red')" value="">
+					<input type="button" class="sideMenuButton no-zoom green" onclick="changeDrawColor('green')" value="">
+					<input type="button" class="sideMenuButton no-zoom blue" onclick="changeDrawColor('blue')" value="">
+					<input type="button" class="sideMenuButton no-zoom yellow" onclick="changeDrawColor('yellow')" value="">
+					<input type="button" class="sideMenuButton no-zoom purple" onclick="changeDrawColor('purple')" value="">
+					<input type="button" class="sideMenuButton no-zoom brown" onclick="changeDrawColor('brown')" value="">
+					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value="">
+					<input type="button" class="sideMenuButton no-zoom black" onclick="changeDrawColor('black')" value="">
+				</div>
 				<canvas id="theCanvas" class="no-zoom"></canvas>
 				
 				<!-- <div id="waitingDiv">Waiting for someone else</div> -->
