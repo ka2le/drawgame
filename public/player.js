@@ -37,9 +37,7 @@ function onload(){
 	console.log("window.innerHeight "+window.innerHeight);
 	console.log("screen.height "+screen.height);
 	console.log("$('#theCanvas').height()"+$("#theCanvas").height());
-	diffY = window.innerHeight-screen.height;
-	console.log("diffY "+diffY);
-	
+	updateDiffY();
 	//draw();
 	
 }
@@ -65,7 +63,12 @@ function changeDrawSize(width){
 	ctx.lineWidth=lineWidth;
 	send("changeDrawSize",lineWidth );
 }
+function updateDiffY(){
+	diffY = Math.floor((window.innerHeight-screen.height)/2);
+	//console.log("diffY "+diffY);
+	
 
+}
 function changeDrawColor(color){
 	//console.log("changeDrawColor");
 	//console.log(theButton);
@@ -215,7 +218,7 @@ function initJquery(){
 	});
 		$(window).resize(function () {
 		updateCanvasSize();
-		diffY = window.innerHeight-screen.height;
+		updateDiffY();
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
