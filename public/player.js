@@ -137,8 +137,33 @@ function handleDrawMessage(message){
 	//currY = parseInt(message.substring(4, 8));
 	//draw();
 }
+//------------------------------------------------Turn Stuff----------------------------------------------------------------------------------------------------------------------------------------------
+var yourWord ="";
+function startTurn(word){
+	$("#inputContainer").show();
+	$("#whatsMyWordButton").show();
+	$("#waitingDiv").hide();
+	$("#guessContainer").hide();
+	yourWord = word;
+	whatsMyWord();
+}
+function showGuessing(){
+	$("#inputContainer").hide();
+	$("#whatsMyWordButton").hide();
+	$("#waitingDiv").hide();
+	$("#guessContainer").show();
+}
+function whatsMyWord(){
+	document.getElementById("yourWord").innerHTML = "Your word is: "+ yourWord;
+	$("#yourWord").show();
+	$("#yourWord").fadeOut(5000);
+	//alert("your word is "+ yourWord);
+}
+function guess(){
+	var guess = document.getElementById("guessText").value;
+	send("guess", guess);
 
-
+}
 //------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
 function iAmReady(){
 	console.log("iAmReady: " +playerNumber);
@@ -156,6 +181,14 @@ function handleInput(data){
 		canvasSize = data.value;
 		canvasHeight = data.value2;
 		updateCanvasVariables();
+	}
+	if(intent=="startTurn"){
+		if(playerNumber==data.value){
+			startTurn(data.value2);
+			console.log("start");
+		}else{
+			showGuessing();
+		}
 	}
 }
 
@@ -267,3 +300,30 @@ function toggleFullScreen() {
   }
 }
 //--------------------------------------------Test-------------------------------------
+
+function testStart(){
+	toggleMenu();
+	var message = {
+      intent: "startTurn",
+	  value: 0,
+	  value2: "apple",
+	  sender: "host",
+	  playerNumber: 1
+    };
+	handleInput(message);
+}
+function testStart2(){
+	toggleMenu();
+	var message = {
+      intent: "startTurn",
+	  value: 1,
+	  value2: "apple",
+	  sender: "host",
+	  playerNumber: 1
+    };
+	handleInput(message);
+}
+
+
+
+

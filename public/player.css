@@ -96,7 +96,7 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	top:3vh;
 	right: 2vh;
 	z-index:152;
-	//height:20vh;
+	height:10vh;
 }
 
 #soundImg{
@@ -231,4 +231,48 @@ width:13.5vw;
 	position:absolute;
 	height:0xp;
 	top:100vh;
+}
+
+
+
+#inputContainer{
+
+	display:none;
+}
+
+#waitingDiv{
+	font-size:5em;
+ position:absolute; 
+ top: 20vh;
+ left: 20vw;
+ width:60vw;
+}
+#yourWord{
+	font-size:5em;
+ position:absolute; 
+ top: 20vh;
+
+ left: 20vw;
+ width:60vw;
+}
+#whatsMyWordButton{
+ display:none;
+}
+
+#guessContainer{
+	display:none;
+	font-size:1em;
+	position:absolute;
+	top:20vh;
+	//margin-left:vw;
+	left:0px;
+	text-align:center;
+
+}
+#guessContainer input{
+	font-size:3em;
+//	float:left;
+	margin-left:10vw;
+	left:0px;
+
 }

@@ -16,12 +16,7 @@
  <link href="favicon.ico" rel="icon" type="image/png" />
 </head>
 <body onload="onload()">
-	<div id="rotate">Please rotate your device
-	<br>
-	<br>
-	<br>
-	<img src="img/rotate.png"></img>
-	</div>
+	
 	<label onclick="" id="playerNumber" value="0"></label>
 		
 		<div id="sound" >
@@ -35,14 +30,15 @@
 		 <div id="menu">
 					<!-- <input type="button" onclick="initReconnect()" value="Reconnect" > <br> -->
 					<h1>Menu</h1><p class="line"></p>
+					
 					<input type="button" class="menuButton" id="sideHide" onclick="toggleSideMenu()" value="Hide Toolbar" > <br>
-					<input type="button" class="menuButton" onclick="clearCanvas()" value="Clear" > <br>
+					<input type="button" class="menuButton" onclick="clearCanvas()" value="Clear Drawing" > <br>
+					<input type="button" class="menuButton" onclick="whatsMyWord()" id="whatsMyWordButton" value="Click here to see word again" > <br>
+					<p class="line"></p>
 					<div id="player1Stuff">
-					<!-- <input type="button" onclick="startGame('1')" value="Start 1 player game" > <br>
-					<input type="button" onclick="startGame('2')" value="Start 2 player game" > <br>
-					<input type="button" onclick="startGame('3')" value="Start 3 player game" > <br>
-					<input type="button" onclick="startGame('4')" value="Start 4 player game" > <br>
-					<input type="button" onclick="reroll()" value="Draw New Tile" > <br> -->
+					<input type="button" onclick="testStart()" value="Start " > <br>
+					<input type="button" onclick="testStart2()" value="Start Someone Else " > <br>
+
 <!--  					<input type="button" onclick="startGame('5')" value="Start 5 player game" > <br>
 					<input type="button" onclick="testTile('4')" value="new Tile"><br>
 					<input type="button" onclick="testPlaceMeeple()" value="place MEELPE" > <br>
@@ -52,6 +48,12 @@
 
 			</div> 
 			<div id="inputContainer" >
+				<div id="rotate">Please rotate your device
+					<br>
+					<br>
+					<br>
+					<img src="img/rotate.png"></img>
+					</div>
 				<div id="sideMenu">
 					
 					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="T">
@@ -70,6 +72,13 @@
 				
 				<!-- <div id="waitingDiv">Waiting for someone else</div> -->
 			</div> 
+			 <div id="waitingDiv">Waiting for game to start</div>
+			<div id="yourWord"></div>
+			<div id="guessContainer">
+				<input type="text" id="guessText" placeholder="Write your guess here">
+				<input type="button"  onclick="guess()"  value="Send Guess" > <br>
+			
+			</div>
 <!-- 	<div class="shape2"></div>
 	<div class="shape4"></div> -->
  <div id="bottomTag"></div>

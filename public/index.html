@@ -21,9 +21,7 @@
 		<img id="closeButton" onclick="toggleMenu()" src="img/x.png">
 		<h1> Draw Game by KK</h1>
 		<p class="line"></p>
-		<input type="button" class="menuButton"  value="Start 2 Player Game" onclick="restartGame('2')"><br>
-		<input type="button" class="menuButton"  value="Start 3 Player Game" onclick="restartGame('3')"><br>
-		<input type="button" class="menuButton"  value="Start 4 Player Game" onclick="restartGame('4')"><br>
+		<input type="button" class="menuButton"  value="Start New Game" onclick="startGame()"><br>
 		<p class="line"></p>
 		<input type="button" class="menuButton" value="Clear" onclick="clearCanvas()"><br>
 		<p><input type="checkbox"  id="cheatsCheck" value="Cheats" onclick=""> Cheats</P>
@@ -37,9 +35,13 @@
 </div>
 <div id="testButtons">
 <input type="button" style="height: 5vh; font-size:2em;"onclick="testDraw()" value="Test Draw">
+<input type="button" style="height: 5vh; font-size:2em;"onclick="testplayerJoin(0)" value="test Join 1">
+<input type="button" style="height: 5vh; font-size:2em;"onclick="testplayerJoin(1)" value="test Join 2">
+<input type="button" style="height: 5vh; font-size:2em;"onclick="testplayerJoin(2)" value="test Join 3">
+<input type="button" style="height: 5vh; font-size:2em;"onclick="newRound()" value="newRound">
 </div>
 <div id="info">	
-	Waiting for game to start
+	
 </div>
 <div id="info2">	
 	Place Meeple
@@ -55,26 +57,18 @@
 <div id="player1" class="playerInfo ">
 <h1>Player 1</h1>
 <input id="scoreTextPlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
-<input id="potentialTextPlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
-<input id="meeplePlayer1" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
 </div>
 <div id="player2" class="playerInfo ">
 <h1>Player 2</h1>
 <input id="scoreTextPlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
-<input id="potentialTextPlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
-<input id="meeplePlayer2" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
 </div>
 <div id="player3" class="playerInfo">
 <h1>Player 3</h1>
 <input id="scoreTextPlayer3" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
-<input id="potentialTextPlayer3" type="text" value="0"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
-<input id="meeplePlayer3" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
 </div>
 <div id="player4" class="playerInfo">
 <h1>Player 4</h1>
 <input id="scoreTextPlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Points<br>
-<input id="potentialTextPlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Potential Points<br>
-<input id="meeplePlayer4" type="text" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="scoreText" readonly>Meeples<br>
 </div>
 </body>
 </html>
