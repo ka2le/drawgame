@@ -146,8 +146,12 @@ function startTurn(word){
 	$("#waitingDiv").hide();
 	$("#guessContainer").hide();
 	yourTurn = true;
-	yourWord = word;
-	whatsMyWord();
+	if(word==yourWord){
+		console.log("I know");
+	}else{
+		yourWord = word;
+		whatsMyWord();
+	}
 }
 function showGuessing(){
 	yourTurn = false;
