@@ -27,7 +27,8 @@
   position: absolute;
   height: 7px;
   width: 100%;
-  background: rgb(100,200,10);
+  background: rgb(150,150,255);
+  //color:rgb(150,150,255);
   border-radius: 9px;
   opacity: 1;
   left: 0;

@@ -215,6 +215,22 @@ function toggleMenu(){
 			$("#menu").slideDown(200);
 		}
 }
+function toggleSideMenu(){
+		//$("#nav-icon3").toggleClass('open');
+		console.log("sideMenu");
+		if($("#sideMenu").is(":visible")){
+			$("#sideMenu").hide(200);
+			window.setTimeout(function() {
+				$("#sideHide").val("Show Toolbar");
+			}, 200);
+		}else{
+			$("#sideMenu").show(200);
+			window.setTimeout(function() {
+				$("#sideHide").val("Hide Toolbar");
+			}, 200);
+			
+		}
+}
 function toggleFullScreen() {
   var doc = window.document;
   var docEl = doc.documentElement;

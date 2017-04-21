@@ -34,7 +34,7 @@
 		 <div id="menu">
 					<!-- <input type="button" onclick="initReconnect()" value="Reconnect" > <br> -->
 					<h1>Menu</h1><p class="line"></p>
-					<input type="button" class="menuButton" onclick="clearCanvas()" value="Clear Everything" > <br>
+					<input type="button" class="menuButton" id="sideHide" onclick="toggleSideMenu()" value="Hide Toolbar" > <br>
 					
 					<div id="player1Stuff">
 					<!-- <input type="button" onclick="startGame('1')" value="Start 1 player game" > <br>
@@ -53,8 +53,8 @@
 			<div id="inputContainer" >
 				<div id="sideMenu">
 					
-					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="|">
-					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="|">
+					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="T">
+					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="B">
 					<input type="button" class="sideMenuButton no-zoom red" onclick="changeDrawColor('red')" value="">
 					<input type="button" class="sideMenuButton no-zoom green" onclick="changeDrawColor('green')" value="">
 					<input type="button" class="sideMenuButton no-zoom blue" onclick="changeDrawColor('blue')" value="">
@@ -63,6 +63,7 @@
 					<input type="button" class="sideMenuButton no-zoom brown" onclick="changeDrawColor('brown')" value="">
 					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value="">
 					<input type="button" class="sideMenuButton no-zoom black" onclick="changeDrawColor('black')" value="">
+					<input type="button" class="sideMenuButton no-zoom clear" onclick="clearCanvas()" value="Clear">
 				</div>
 				<canvas id="theCanvas" class="no-zoom"></canvas>
 				
