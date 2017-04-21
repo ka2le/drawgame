@@ -170,6 +170,9 @@ function initJquery(){
 		event.stopPropagation();
 		toggleMenu();
 	});
+	$( window ).scroll(function() {
+		  updateCanvasSize();
+		});
 	canvas.addEventListener("mousemove", function (e) {
             findxy('move', e)
         }, false);
@@ -204,10 +207,10 @@ function initJquery(){
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
-$(window).load(function() {
+/* $(window).load(function() {
   $("html, body").animate({ scrollTop: $(document).height() }, 1);
 });
-
+ */
 
 function toggleMenu(){
 		$("#nav-icon3").toggleClass('open');
