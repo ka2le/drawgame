@@ -199,7 +199,7 @@ function initJquery(){
         }, false);
         canvas.addEventListener("touchstart", function (e) {
 			e.preventDefault();
-			var values= "e.clientX "+parseInt(e.changedTouches[0].clientX) +" "+"e.pageX "+parseInt(e.changedTouches[0].pageX) +"e.touches.pageX "+parseInt(e.touches[0].pageX) ;
+			var values= "diffY " +diffY+ " canvasHeight" + canvasHeight;
 				document.getElementById("playerNumber").innerHTML = values;
             findxy('down', e.changedTouches[0])
         }, false);
