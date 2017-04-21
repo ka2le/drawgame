@@ -174,7 +174,6 @@ function whatsMyWord(){
 function guess(){
 	var guess = document.getElementById("guessText").value;
 	send("guess", guess);
-
 }
 function showInfo(text){
 	document.getElementById("waitingDiv").innerHTML = text;
@@ -183,8 +182,15 @@ function showInfo(text){
 	$("#waitingDiv").show();
 	$("#guessContainer").hide();
 }
+function showWrong(){
+	document.getElementById("guessText").value = "";
+	$("#guessText").attr("placeholder", "Wrong");
+}
 function sendStart(){
 	send("startGame");
+}
+function getNewWord(){
+	send("getNewCard");
 }
 //------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
 function iAmReady(){
@@ -224,6 +230,11 @@ function handleInput(data){
 			}
 		} 
 		
+	}
+	if(intent=="incorrect"){
+		if(playerNumber==data.value){	
+			showWrong();
+		}
 	}
 }
 

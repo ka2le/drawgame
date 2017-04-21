@@ -21,7 +21,9 @@ var userWidth;
 var userHeight;
 var turnString;
 var lineWidth;
-var words = ["apple", "santa", "frog", "tree"];
+var words = ["apple", "frog", "tree","nose", "cloud", "gun", "motorcycle","strawberry", "ship" , "headband", "window", "eagle", "brick", "coal", "suitcase", "cowboy", "desk", "owl", "lake", "ski", "radish", "flamingo" ,
+ "tank", "lemon", "recycle", "deep", "point", "safe", "download", "speakers", "avocado", "birthday", "dream", "sushi", "dolphin", "owl", "baby", "face", "round", "key", "watch", "mailbox", "saw", "stove", "grill", "rainbow", "pear",
+ "mushroom", "sheep", "cake", "shark", "pirate", "trumpet", "coin", "tennis", "fork", "bomb", "map", "glasses", "bear", "airplane", "heart", "moon", "lamp", "balloon", "crab", "cat", "lion", "hamburger", "chair", "candle", "lips", "whale"];
 var currentWord;
 
 function onload(){
@@ -39,6 +41,7 @@ function onload(){
 	testValues();
 	createPlayers();
 	console.log(players);
+	//console.log(getNewWord());
 }
 
 function continueOnload(){
@@ -130,9 +133,16 @@ function newRound(){
 }
 function getNewWord(){
 	//ska använda random sen
-	return words[currentPlayerNumber];
+	var randomWordNumber =  Math.floor(Math.random() * (words.length-1)) + 1;
+	var theWord = words[randomWordNumber];
+	words.splice(randomWordNumber,1);
+	console.log(words);
+	return theWord;
 }
-
+function redrawWord(){
+	currentWord = getNewWord();
+	send(turnString, currentPlayerNumber, currentWord);
+}
 function handleGuess(guess, playerId){
 	console.log("player " + playerId + "guessed "+guess);
 	if(guess.toLowerCase() == currentWord){
@@ -146,6 +156,8 @@ function handleGuess(guess, playerId){
 			updateGameInfo("");
 		}, 5000);
 		
+	}else{
+		send("incorrect", playerId);
 	}	
 }
 function updateGameInfo(text){
@@ -240,6 +252,9 @@ function handleInput(data){
 		}
 		if(intent=="startGame"){
 			startGame();
+		}
+		if(intent=="getNewCard"){
+			redrawWord();
 		}
 	}
 }	
