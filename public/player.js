@@ -204,6 +204,9 @@ function initJquery(){
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
+$(window).load(function() {
+  $("html, body").animate({ scrollTop: $(document).height() }, 1);
+});
 
 
 function toggleMenu(){
