@@ -64,7 +64,7 @@ function changeDrawSize(width){
 	send("changeDrawSize",lineWidth );
 }
 function updateDiffY(){
-	diffY = Math.floor((window.innerHeight-screen.height)/2);
+	diffY = 30;
 	//console.log("diffY "+diffY);
 	
 
