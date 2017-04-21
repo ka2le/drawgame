@@ -139,15 +139,18 @@ function handleDrawMessage(message){
 }
 //------------------------------------------------Turn Stuff----------------------------------------------------------------------------------------------------------------------------------------------
 var yourWord ="";
+var yourTurn = false;
 function startTurn(word){
 	$("#inputContainer").show();
 	$("#whatsMyWordButton").show();
 	$("#waitingDiv").hide();
 	$("#guessContainer").hide();
+	yourTurn = true;
 	yourWord = word;
 	whatsMyWord();
 }
 function showGuessing(){
+	yourTurn = false;
 	$("#inputContainer").hide();
 	$("#whatsMyWordButton").hide();
 	$("#waitingDiv").hide();
@@ -170,6 +173,9 @@ function showInfo(text){
 	$("#whatsMyWordButton").hide();
 	$("#waitingDiv").show();
 	$("#guessContainer").hide();
+}
+function sendStart(){
+	send("startGame");
 }
 //------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
 function iAmReady(){
@@ -198,11 +204,17 @@ function handleInput(data){
 		}
 	}
 	if(intent=="correct"){
-		if(playerNumber==data.value){
-			showInfo("Congratulations. You got it right!");
+		if(yourTurn){
+			showInfo("Player "+ (data.value+1) +" guessed your drawing.");
+			yourTurn = false;
 		}else{
-			showInfo("Sorry. Time is up! Player "+ (data.value+1) +" got it right.");
-		}
+			if(playerNumber==data.value){
+				showInfo("Congratulations. You got it right!");
+			}else{
+				showInfo("Sorry. Time is up! Player "+ (data.value+1) +" got it right.");
+			}
+		} 
+		
 	}
 }
 

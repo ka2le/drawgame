@@ -246,6 +246,7 @@ width:13.5vw;
  top: 20vh;
  left: 20vw;
  width:60vw;
+// display:none;
 }
 #yourWord{
 	font-size:5em;
@@ -263,16 +264,17 @@ width:13.5vw;
 	display:none;
 	font-size:1em;
 	position:absolute;
-	top:20vh;
+	top:40px;
+		margin-left:5vw;
 	//margin-left:vw;
 	left:0px;
 	text-align:center;
 
 }
 #guessContainer input{
-	font-size:3em;
+	font-size:40px;
 //	float:left;
-	margin-left:10vw;
+	margin-left:5vw;
 	left:0px;
 
 }

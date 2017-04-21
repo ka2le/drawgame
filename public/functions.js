@@ -48,7 +48,7 @@ function continueOnload(){
 function resetVariables(){
 	lastX = 0;
 	lastY = 0;
-	lineWidth =4;
+	lineWidth =5;
 	currentWord="";
 	turnString ="waiting";
 	drawColor = "black";
@@ -134,7 +134,7 @@ function getNewWord(){
 
 function handleGuess(guess, playerId){
 	console.log("player " + playerId + "guessed "+guess);
-	if(guess == currentWord){
+	if(guess.toLowerCase() == currentWord){
 		console.log("correct Guess");
 		players[playerId].score++;
 		updatePlayerInfo();
@@ -229,6 +229,9 @@ function handleInput(data){
 		}
 		if(intent=="guess"){
 			handleGuess(data.value, data.playerNumber); 
+		}
+		if(intent=="startGame"){
+			startGame();
 		}
 	}
 }	
