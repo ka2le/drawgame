@@ -215,6 +215,7 @@ function initJquery(){
 	});
 		$(window).resize(function () {
 		updateCanvasSize();
+		diffY = window.innerHeight-screen.height;
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
