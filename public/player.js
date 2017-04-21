@@ -66,8 +66,6 @@ function changeDrawSize(width){
 function updateDiffY(){
 	diffY = 30;
 	//console.log("diffY "+diffY);
-	
-
 }
 function changeDrawColor(color){
 	//console.log("changeDrawColor");
@@ -76,8 +74,17 @@ function changeDrawColor(color){
 	drawColor= $("."+color).css("background-color");
 	//console.log(drawColor);
 	ctx.strokeStyle = drawColor;
+	ctx.fillStyle = drawColor;
 	//console.log(ctx.fillStyle );
 	send("changeDrawColor",drawColor );
+}
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	send("clear");
+}
+function fillCanvas(){
+	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	send("fill");
 }
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
 function draw(){
@@ -118,10 +125,7 @@ function findxy(res, e) {
             }
         }
     }
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-	send("clear");
-}
+
 function sendCurrentXY(){
 	var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
 	send("DrawMessage", value);
@@ -285,6 +289,7 @@ function initJquery(){
 		$(window).resize(function () {
 		updateCanvasSize();
 		updateDiffY();
+		updateHideDivSize();
 		 if( yourTurn){
 			send("userCanvas", canvasWidth, canvasHeight);
 		  }
@@ -296,6 +301,11 @@ function initJquery(){
 });
  */
 
+ function updateHideDivSize(){
+	document.getElementById("rotate").style.height = "100vh";
+	document.getElementById("rotate").style.width = "100vw";
+ }
+ 
 function toggleMenu(){
 		$("#nav-icon3").toggleClass('open');
 		console.log("menu");

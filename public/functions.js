@@ -154,7 +154,9 @@ function updateGameInfo(text){
 //------------------------------------------------Canvas stuff----------------------------------------------------------------------------------------------------------------------------------------------
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-
+}
+function fillCanvas(){
+	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 }
 function changeDrawSize(width){
 
@@ -164,7 +166,9 @@ function changeDrawSize(width){
 function changeDrawColor(rgb){
 			drawColor = rgb;
 			ctx.strokeStyle = drawColor;
+			ctx.fillStyle = drawColor;
 		}
+		
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
 
 function findxy(res, e) {
@@ -216,6 +220,9 @@ function handleInput(data){
 		}
 		if(intent=="clear"){
 			clearCanvas();
+		}
+		if(intent=="fill"){
+			fillCanvas();
 		}
 		if(intent=="userCanvas"){
 			userWidth = data.value;

@@ -49,12 +49,7 @@
 
 			</div> 
 			<div id="inputContainer" >
-				<div id="rotate">Please rotate your device
-					<br>
-					<br>
-					<br>
-					<img src="img/rotate.png"></img>
-					</div>
+				
 				<div id="sideMenu">
 					
 					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="T">
@@ -68,6 +63,7 @@
 					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value="">
 					<input type="button" class="sideMenuButton no-zoom black" onclick="changeDrawColor('black')" value="">
 					<input type="button" class="sideMenuButton no-zoom clear" onclick="clearCanvas()" value="Clear">
+					<input type="button" class="sideMenuButton no-zoom clear" onclick="fillCanvas()" value="Fill">
 				</div>
 				<canvas id="theCanvas" class="no-zoom"></canvas>
 				
@@ -82,6 +78,12 @@
 			</div>
 <!-- 	<div class="shape2"></div>
 	<div class="shape4"></div> -->
+	<div id="rotate">Please rotate your device
+					<br>
+					<br>
+					<br>
+					<img src="img/rotate.png"></img>
+					</div>
  <div id="bottomTag"></div>
 </body>
 </html>
