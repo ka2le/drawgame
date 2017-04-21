@@ -164,6 +164,13 @@ function guess(){
 	send("guess", guess);
 
 }
+function showInfo(text){
+	document.getElementById("waitingDiv").innerHTML = text;
+	$("#inputContainer").hide();
+	$("#whatsMyWordButton").hide();
+	$("#waitingDiv").show();
+	$("#guessContainer").hide();
+}
 //------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
 function iAmReady(){
 	console.log("iAmReady: " +playerNumber);
@@ -188,6 +195,13 @@ function handleInput(data){
 			console.log("start");
 		}else{
 			showGuessing();
+		}
+	}
+	if(intent=="correct"){
+		if(playerNumber==data.value){
+			showInfo("Congratulations. You got it right!");
+		}else{
+			showInfo("Sorry. Time is up! Player "+ (data.value+1) +" got it right.");
 		}
 	}
 }
@@ -235,8 +249,8 @@ function initJquery(){
         }, false);
         canvas.addEventListener("touchstart", function (e) {
 			e.preventDefault();
-			var values= "diffY " +diffY+ " canvasHeight" + canvasHeight;
-				document.getElementById("playerNumber").innerHTML = values;
+		//	var values= "diffY " +diffY+ " canvasHeight" + canvasHeight;
+			//	document.getElementById("playerNumber").innerHTML = values;
             findxy('down', e.touches[0])
         }, false);
 		canvas.addEventListener("touchend", function (e) {

@@ -122,6 +122,7 @@ function newRound(){
 		}
 	}
 	updatePlayerInfo();
+	clearCanvas();
 	currentWord = getNewWord();
 	turnString = "startTurn";
 	send(turnString, currentPlayerNumber, currentWord);
@@ -133,6 +134,21 @@ function getNewWord(){
 
 function handleGuess(guess, playerId){
 	console.log("player " + playerId + "guessed "+guess);
+	if(guess == currentWord){
+		console.log("correct Guess");
+		players[playerId].score++;
+		updatePlayerInfo();
+		updateGameInfo("Player "+ (playerId+1) +" got it right. The word was "+ currentWord +".");
+		send("correct", playerId);
+		setTimeout(function(){ 
+			newRound();
+			updateGameInfo("");
+		}, 5000);
+		
+	}	
+}
+function updateGameInfo(text){
+	document.getElementById("info").innerHTML = text;
 }
 //------------------------------------------------Canvas stuff----------------------------------------------------------------------------------------------------------------------------------------------
 function clearCanvas(){
@@ -211,7 +227,7 @@ function handleInput(data){
 		if(intent=="changeDrawColor"){
 			changeDrawColor(data.value);
 		}
-		if(intent==guess){
+		if(intent=="guess"){
 			handleGuess(data.value, data.playerNumber); 
 		}
 	}
