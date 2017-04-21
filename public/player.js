@@ -33,6 +33,8 @@ function onload(){
 	window.scrollTo(0,100);
 	console.log("canvasWidth "+canvasWidth);
 	console.log("canvasHeight "+canvasHeight);
+	console.log("canvasWidth "+window.innerHeight);
+	console.log("canvasHeight "+screen.height);
 	//draw();
 	
 }
