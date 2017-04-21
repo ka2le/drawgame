@@ -11,6 +11,7 @@ var lastY;
 var currX =300;
 var currY =500;
 var flag = false;
+var diffY;
 function onload(){
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
@@ -33,8 +34,12 @@ function onload(){
 	window.scrollTo(0,100);
 	console.log("canvasWidth "+canvasWidth);
 	console.log("canvasHeight "+canvasHeight);
-	console.log("canvasWidth "+window.innerHeight);
-	console.log("canvasHeight "+screen.height);
+	console.log("window.innerHeight "+window.innerHeight);
+	console.log("screen.height "+screen.height);
+	console.log("$('#theCanvas').height()"+$("#theCanvas").height());
+	diffY = window.innerHeight-screen.height;
+	console.log("diffY "+diffY);
+	
 	//draw();
 	
 }
@@ -89,7 +94,7 @@ function findxy(res, e) {
 			
 		
             currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
+            currY = e.clientY - canvas.offsetTop-diffY;
 			lastX = currX;
 			lastY = currY;
             flag = true;
@@ -105,7 +110,7 @@ function findxy(res, e) {
         if (res == 'move') {
             if (flag) {
                 currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
+                currY = e.clientY - canvas.offsetTop-diffY;
 				sendCurrentXY();
             }
         }
