@@ -96,8 +96,8 @@ function findxy(res, e) {
 			//document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
 			
 		
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop-diffY;
+            currX = e.pageX - canvas.offsetLeft;
+            currY = e.pageY - canvas.offsetTop-diffY;
 			lastX = currX;
 			lastY = currY;
             flag = true;
@@ -112,8 +112,8 @@ function findxy(res, e) {
         }
         if (res == 'move') {
             if (flag) {
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop-diffY;
+                currX = e.pageX - canvas.offsetLeft;
+                currY = e.pageY - canvas.offsetTop-diffY;
 				sendCurrentXY();
             }
         }
@@ -198,13 +198,13 @@ function initJquery(){
             findxy('out', e)
         }, false);
 		canvas.addEventListener("touchmove", function (e) {
-			findxy('move', e.changedTouches[0])
+			findxy('move', e.touches[0])
         }, false);
         canvas.addEventListener("touchstart", function (e) {
 			e.preventDefault();
 			var values= "diffY " +diffY+ " canvasHeight" + canvasHeight;
 				document.getElementById("playerNumber").innerHTML = values;
-            findxy('down', e.changedTouches[0])
+            findxy('down', e.touches[0])
         }, false);
 		canvas.addEventListener("touchend", function (e) {
             findxy('up', e)
