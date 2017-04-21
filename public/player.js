@@ -243,6 +243,9 @@ function initJquery(){
 	});
 	$( window ).scroll(function() {
 		  updateCanvasSize();
+		  if( yourTurn){
+			send("userCanvas", canvasWidth, canvasHeight);
+		  }
 		});
 	canvas.addEventListener("mousemove", function (e) {
             findxy('move', e)
