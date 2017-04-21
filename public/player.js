@@ -166,6 +166,7 @@ function showGuessing(){
 }
 function whatsMyWord(){
 	document.getElementById("yourWord").innerHTML = "Your word is: "+ yourWord;
+	document.getElementById("whatsMyWordButton").value = "Your word is: "+ yourWord;
 	$("#yourWord").show();
 	$("#yourWord").fadeOut(5000);
 	//alert("your word is "+ yourWord);
