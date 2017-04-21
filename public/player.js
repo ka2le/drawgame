@@ -83,7 +83,7 @@ function draw(){
 
 function findxy(res, e) {
         if (res == 'down') {
-			
+			document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
             currX = e.clientX - canvas.offsetLeft;
             currY = e.clientY - canvas.offsetTop;
 			lastX = currX;
