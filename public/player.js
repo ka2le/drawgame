@@ -281,6 +281,9 @@ function initJquery(){
 		$(window).resize(function () {
 		updateCanvasSize();
 		updateDiffY();
+		 if( yourTurn){
+			send("userCanvas", canvasWidth, canvasHeight);
+		  }
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 }
