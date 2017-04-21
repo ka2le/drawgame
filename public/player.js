@@ -83,7 +83,9 @@ function draw(){
 
 function findxy(res, e) {
         if (res == 'down') {
-			document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
+			//document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
+			
+		
             currX = e.clientX - canvas.offsetLeft;
             currY = e.clientY - canvas.offsetTop;
 			lastX = currX;
@@ -190,6 +192,8 @@ function initJquery(){
         }, false);
         canvas.addEventListener("touchstart", function (e) {
 			e.preventDefault();
+			var values= "e.clientX "+parseInt(e.changedTouches[0].clientX) +" "+"e.pageX "+parseInt(e.changedTouches[0].pageX) +"e.touches.pageX "+parseInt(e.touches[0].pageX) ;
+				document.getElementById("playerNumber").innerHTML = values;
             findxy('down', e.changedTouches[0])
         }, false);
 		canvas.addEventListener("touchend", function (e) {
