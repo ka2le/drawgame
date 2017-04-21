@@ -166,7 +166,7 @@ function initJquery(){
 	  // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
 	})
 
-	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4,#sound').click(function(event){
+	$('#sound').click(function(event){
 		event.stopPropagation();
 		toggleMenu();
 	});
