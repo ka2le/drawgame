@@ -101,6 +101,7 @@ function startGame(){
 }
 	
 function newRound(){
+	console.log("newRound");
 	currentPlayerNumber++;
 	var foundNextPlayer = false;
 	var oneWayRound = false;
@@ -196,7 +197,7 @@ function handleInput(data){
 		//send("canvasSize", canvasWidth, canvasHeight);
 		var thisplayerNumber = data.playerNumber;
 		activatePlayer(thisplayerNumber);
-		send(turnString, currentPlayerNumber);
+		send(turnString, currentPlayerNumber, currentWord);
 	}
 	if(intent=="DrawMessage"){
 		var value = data.value;
@@ -261,7 +262,7 @@ function translateUserXY(text){
 	
 	var newX = (inputX/userWidth)*canvasWidth;
 	var newY = (inputY/userHeight)*canvasHeight;
-	console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
+	//console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
 	return [newX,newY];
 }
 //------------------------------------------------SendFunction for player code----------------------------------------------------------------------------------------------------------------------------------------------
