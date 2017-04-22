@@ -21,16 +21,14 @@ function onload(){
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
 	console.log(playerNumber);
-	startConnection();
+	
 	console.log(window.location.host);
 	playerNumber--;
 	document.getElementById("playerNumber").innerHTML = ("Player: "+(playerNumber+1));
 	if(playerNumber==0){
 		document.getElementById("player1Stuff").style.display = "inline";
 	}
-	if(window.location.host=="localhost:4330"){
-		continueOnload();
-	}
+	
 	resetVariables();
 	initCanvasVariables();
 	initJquery();
@@ -44,7 +42,11 @@ function onload(){
 	console.log("screen.height "+screen.height);
 	console.log("$('#theCanvas').height()"+$("#theCanvas").height());
 	updateDiffY();
-	clearCanvas();
+	
+	startConnection();
+	if(window.location.host=="localhost:4330"){
+		continueOnload();
+	}
 	//draw();
 	
 }
@@ -52,6 +54,7 @@ function continueOnload(){
 	//$("#sent").hide();
 	console.log("continueOnload");
 	iAmReady();
+	clearCanvas();
 	send("userCanvas", canvasWidth, canvasHeight);
 	//clearCanvas();
 	//waitForOthers();
