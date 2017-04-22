@@ -178,13 +178,17 @@ function changeDrawSize(width){
 	lineWidth= width;
 	ctx.lineWidth=lineWidth;
 }
+var img = new Image();
 function drawImgData(imgData){
 	clearCanvas();
-	var img = new Image();
 	img.src = imgData;
 	img.onload = function() {
 		ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 	};
+}
+function updateToCurrentState(){
+	clearCanvas();
+	ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 }
 function changeDrawColor(rgb){
 			drawColor = rgb;
@@ -363,7 +367,9 @@ function jQueryInits(){
 		}
     });
 	$(window).resize(function () {
-		//updateCanvasSize();
+		updateCanvasSize();
+		updateToCurrentState();
+		updateCanvasVariables();
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 
