@@ -53,6 +53,7 @@ function continueOnload(){
 	console.log("continueOnload");
 	iAmReady();
 	send("userCanvas", canvasWidth, canvasHeight);
+	//clearCanvas();
 	//waitForOthers();
 }
 
@@ -107,18 +108,22 @@ function changeDrawColor(color){
 	//console.log(ctx.fillStyle );
 	send("changeDrawColor",drawColor );
 }
-function clearCanvas(){
+function clearCanvas(type){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 	ctx.fillStyle = drawColor;
 	send("clear");
-	updateHistory();
+	if(type!="dontlog"){
+		updateHistory();
+	}
+	
 }
 function fillCanvas(){
 	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
-	send("fill");
-	ctx.strokeStyle = "black";
+	send("fill", drawColor);
+	changeDrawColor("black")
+	//ctx.strokeStyle = "black";
 	updateHistory();
 }
 
@@ -207,7 +212,7 @@ function createHistoryArray(){
 }
 function clearFutureHistory(){
 	for(var i =(historyState+1); i<imgHistory.length; i++){
-		imgHistory[0] =  "not used";
+		imgHistory[i] =  "not used";
 	}
 }
 function getHistoryState(upOrDown){
@@ -246,6 +251,7 @@ function updateToCurrentState(oppositeDirection){
 		historyState = getHistoryState(oppositeDirection);
 	}else{
 		var oldImgData = imgHistory[historyState];
+		clearCanvas("dontlog");
 		drawImgData(oldImgData);
 		send("drawImgData", oldImgData);
 	}

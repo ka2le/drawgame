@@ -179,6 +179,7 @@ function changeDrawSize(width){
 	ctx.lineWidth=lineWidth;
 }
 function drawImgData(imgData){
+	clearCanvas();
 	var img = new Image();
 	img.src = imgData;
 	img.onload = function() {
@@ -210,6 +211,7 @@ function draw(){
 	for(var i =0; i<drawDots.length;i++){
 		ctx.lineTo(drawDots[i].x,drawDots[i].y);
 	}
+	console.log(drawDots);
 	ctx.stroke();
 	lastX = currX;
 	lastY = currY;
@@ -361,7 +363,7 @@ function jQueryInits(){
 		}
     });
 	$(window).resize(function () {
-		updateCanvasSize();
+		//updateCanvasSize();
 		//send("canvasSize", canvasWidth, canvasHeight);
 	});
 

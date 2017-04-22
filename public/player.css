@@ -165,8 +165,8 @@ border:none;
 #sideMenu{
 	position:absolute;
 	z-index:150;
-	overflow:scroll;
-		height:100vh;
+	//overflow:scroll;
+		//height:100vh;
 		background: rgba(180,180,230,0.3); /* Old browsers */
 /* background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(69,72,77,1) 100%); 
 background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); */
