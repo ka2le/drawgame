@@ -180,14 +180,14 @@ function changeDrawSize(width){
 }
 var img = new Image();
 function drawImgData(imgData){
-	clearCanvas();
+	//clearCanvas();
 	img.src = imgData;
 	img.onload = function() {
 		ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 	};
 }
 function updateToCurrentState(){
-	clearCanvas();
+	//clearCanvas();
 	ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 }
 function changeDrawColor(rgb){
@@ -266,29 +266,39 @@ function handleInput(data){
 			lastX = translateUserXY(data.value)[0];
 			lastY = translateUserXY(data.value)[1];
 		}
-		if(intent=="stop"){
-			flag = false;
-			drawDots = [];
-		}
-		if(intent=="clear"){
-			clearCanvas();
-		}
-		if(intent=="fill"){
-			fillCanvas();
-		}
-		if(intent=="userCanvas"){
-			userWidth = data.value;
-			userHeight = data.value2;
-			canvasWidth = userWidth;
-			canvasHeight = userHeight;
-			updateCanvasVariables();
-			console.log(userWidth+"<userWidth userHeight>"+userHeight);
-		}
-		if(intent=="changeDrawSize"){
-			changeDrawSize(data.value);
-		}
-		if(intent=="changeDrawColor"){
-			changeDrawColor(data.value);
+		if(data.playerNumber == currentPlayerNumber){
+			if(intent=="stop"){
+				flag = false;
+				drawDots = [];
+			}
+			if(intent=="clear"){
+				clearCanvas();
+			}
+			if(intent=="fill"){
+				fillCanvas();
+			}
+			if(intent=="userCanvas"){
+				userWidth = data.value;
+				userHeight = data.value2;
+				canvasWidth = userWidth;
+				canvasHeight = userHeight;
+				updateCanvasVariables();
+				console.log(userWidth+"<userWidth userHeight>"+userHeight);
+			}
+			if(intent=="changeDrawSize"){
+				changeDrawSize(data.value);
+			}
+			if(intent=="changeDrawColor"){
+				changeDrawColor(data.value);
+			}
+			if(intent=="getNewCard"){
+				redrawWord();
+			}
+			if(intent=="drawImgData"){
+				var oldImgData= data.value;
+				drawImgData(oldImgData);
+				//send("drawImgData", oldImgData);
+			}
 		}
 		if(intent=="guess"){
 			handleGuess(data.value, data.playerNumber); 
@@ -296,14 +306,8 @@ function handleInput(data){
 		if(intent=="startGame"){
 			startGame();
 		}
-		if(intent=="getNewCard"){
-			redrawWord();
-		}
-		if(intent=="drawImgData"){
-			var oldImgData= data.value;
-			drawImgData(oldImgData);
-			//send("drawImgData", oldImgData);
-		}
+		
+	
 	}
 }	
 
