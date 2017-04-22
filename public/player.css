@@ -171,7 +171,7 @@ border:none;
 /* background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(69,72,77,1) 100%); 
 background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); */
 		//min-width:10vw;
-		width:5.5vw;
+		width:14vw;
 			-webkit-box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
 box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.15);
@@ -183,11 +183,11 @@ box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.15);
 	font-size:1.7em;
 	vertical-align: middle;
 	//display:block;
-	width:4.5vw;
+	width:6vw;
 	float:left;
 	border-radius: 10px;
 	margin-left:0.5vw;
-	height:4.5vw;
+	height:6vw;
 	overflow:hidden;
 }
 #sideMenu img{

@@ -288,6 +288,8 @@ function showGuessing(){
 	yourTurn = false;
 	$("#inputContainer").hide();
 	$("#whatsMyWordButton").hide();
+	document.getElementById("guessText").value = "";
+	$("#guessText").attr("placeholder", "Write your guess here");
 	$("#waitingDiv").hide();
 	$("#guessContainer").show();
 }
