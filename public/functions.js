@@ -268,6 +268,7 @@ function handleInput(data){
 		}
 		if(intent=="stop"){
 			flag = false;
+			drawDots = [];
 		}
 		if(intent=="clear"){
 			clearCanvas();
