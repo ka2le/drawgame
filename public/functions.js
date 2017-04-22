@@ -179,7 +179,7 @@ function drawImgData(imgData){
 	var img = new Image();
 	img.src = imgData;
 	img.onload = function() {
-		ctx.drawImage(img, 0, 0);
+		ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 	};
 }
 function changeDrawColor(rgb){
