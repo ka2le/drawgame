@@ -85,7 +85,7 @@ function changeDrawSize(width){
 	send("changeDrawSize",lineWidth );
 }
 function updateDiffY(){
-	diffY = 20;
+	diffY = 0;
 	//console.log("diffY "+diffY);
 }
 
@@ -167,6 +167,7 @@ function findxy(res, e) {
 			lastY = currY;
             flag = true;
 			var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
+			console.log(currX +"<x y>" +currY +" "+canvasHeight+"<H W>"+canvasWidth);
 			send("start", value);
 			sendCurrentXY();
         }
@@ -177,6 +178,9 @@ function findxy(res, e) {
 			send("stop");
 			updateHistory();
 			clearFutureHistory();
+			var val = "";
+			val += parseInt(currX) +"x y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth;
+			document.getElementById("playerNumber").innerHTML = ""+val;
         }
         if (res == 'move') {
             if (flag) {
