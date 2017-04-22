@@ -215,7 +215,7 @@ function draw(){
 	for(var i =0; i<drawDots.length;i++){
 		ctx.lineTo(drawDots[i].x,drawDots[i].y);
 	}
-	console.log(drawDots);
+	//console.log(drawDots);
 	ctx.stroke();
 	lastX = currX;
 	lastY = currY;
@@ -336,7 +336,7 @@ function translateUserXY(text){
 	
 	var newX = (inputX/userWidth)*canvasWidth;
 	var newY = (inputY/userHeight)*canvasHeight;
-	//console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
+	console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
 	return [newX,newY];
 }
 //------------------------------------------------SendFunction for player code----------------------------------------------------------------------------------------------------------------------------------------------
