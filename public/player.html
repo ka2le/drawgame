@@ -12,6 +12,7 @@
 <link href="player.css" rel="stylesheet" type="text/css" />
  <link rel="stylesheet" href="hamburger.css">
  	 <script type="text/javascript" src="main.js"></script>
+	  <script type="text/javascript" src="jscolor.min.js"></script>
 	 <script type="text/javascript" src="player.js"></script>
  <link href="favicon.ico" rel="icon" type="image/png" />
 </head>
@@ -54,16 +55,23 @@
 				
 				<div id="sideMenu">
 					
-					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="T">
-					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="B">
-					<input type="button" class="sideMenuButton no-zoom red" onclick="changeDrawColor('red')" value="">
+					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="l">
+					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="I">
+					<button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'} colorSelector sideMenuButton no-zoom ">
+					
+						Palette
+					</button>
+					
+				<!-- 	<input type="button" class="sideMenuButton no-zoom red" onclick="changeDrawColor('red')" value="">
 					<input type="button" class="sideMenuButton no-zoom green" onclick="changeDrawColor('green')" value="">
 					<input type="button" class="sideMenuButton no-zoom blue" onclick="changeDrawColor('blue')" value="">
 					<input type="button" class="sideMenuButton no-zoom yellow" onclick="changeDrawColor('yellow')" value="">
 					<input type="button" class="sideMenuButton no-zoom purple" onclick="changeDrawColor('purple')" value="">
 					<input type="button" class="sideMenuButton no-zoom brown" onclick="changeDrawColor('brown')" value="">
-					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value="">
+					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value=""> -->
 					<input type="button" class="sideMenuButton no-zoom black" onclick="changeDrawColor('black')" value="">
+					<input type="button" class="sideMenuButton no-zoom thick" onclick="undo()" value="↶">
+					<input type="button" class="sideMenuButton no-zoom thick" onclick="redo()" value="↷">
 					<input type="button" class="sideMenuButton no-zoom clear" onclick="clearCanvas()" value="Clear">
 					<input type="button" class="sideMenuButton no-zoom clear" onclick="fillCanvas()" value="Fill">
 				</div>

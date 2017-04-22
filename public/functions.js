@@ -175,6 +175,13 @@ function changeDrawSize(width){
 	lineWidth= width;
 	ctx.lineWidth=lineWidth;
 }
+function drawImgData(imgData){
+	var img = new Image();
+	img.src = imgData;
+	img.onload = function() {
+		ctx.drawImage(img, 0, 0);
+	};
+}
 function changeDrawColor(rgb){
 			drawColor = rgb;
 			ctx.strokeStyle = drawColor;
@@ -255,6 +262,11 @@ function handleInput(data){
 		}
 		if(intent=="getNewCard"){
 			redrawWord();
+		}
+		if(intent=="drawImgData"){
+			var oldImgData= data.value;
+			drawImgData(oldImgData);
+			//send("drawImgData", oldImgData);
 		}
 	}
 }	

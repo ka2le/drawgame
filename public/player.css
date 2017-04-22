@@ -226,7 +226,9 @@ box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.45);
 .clear{
 width:13.5vw;
 	}
-	
+.colorSelector{
+	font-size:1.5eM;
+}
 #bottomTag{
 	position:absolute;
 	height:0xp;
@@ -237,7 +239,7 @@ width:13.5vw;
 
 #inputContainer{
 
-	display:none;
+	//display:none;
 }
 
 #waitingDiv{
@@ -246,7 +248,7 @@ width:13.5vw;
  top: 20vh;
  left: 20vw;
  width:60vw;
-// display:none;
+ display:none;
 }
 #yourWord{
 	font-size:5em;
