@@ -35,7 +35,6 @@ function onload(){
 	initCanvasVariables();
 	initJquery();
 	initCommonJquery();
-	updateHistory();
 	
 	//document.body.requestFullscreen();
 	window.scrollTo(0,100);
@@ -45,9 +44,7 @@ function onload(){
 	console.log("screen.height "+screen.height);
 	console.log("$('#theCanvas').height()"+$("#theCanvas").height());
 	updateDiffY();
-	ctx.fillStyle = "white";
-	fillCanvas();
-	ctx.fillStyle = "black";
+	clearCanvas();
 	//draw();
 	
 }
@@ -69,16 +66,22 @@ function resetVariables(){
 	historyState = 0;
 	imgHistory  = [];
 	createHistoryArray();
-	
 }
 function changeDrawSize(width){
+	if(width==5){
+		lineWidth= Math.ceil(lineWidth*1.3)+1;
+	}
+	if(width==1){
+		lineWidth= Math.floor(lineWidth*0.75);
+	}
 	console.log("changeDrawSize");
-	lineWidth= width;
+	
+	//lineWidth= width;
 	ctx.lineWidth=lineWidth;
 	send("changeDrawSize",lineWidth );
 }
 function updateDiffY(){
-	diffY = 30;
+	diffY = 20;
 	//console.log("diffY "+diffY);
 }
 
@@ -106,21 +109,40 @@ function changeDrawColor(color){
 }
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+	ctx.fillStyle = drawColor;
 	send("clear");
 	updateHistory();
 }
 function fillCanvas(){
 	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 	send("fill");
+	ctx.strokeStyle = "black";
 	updateHistory();
 }
 
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
+var drawDots = [];
+var drawDotsMemory = 30;
+function updateDrawDots(newX,newY){
+	var newDot = []
+	newDot.x = newX;
+	newDot.y = newY;
+	drawDots.push(newDot);
+	if(drawDots.length>drawDotsMemory){
+		drawDots.splice(0,1);
+	}
+}
+
 function draw(){
-	
 	ctx.beginPath();
-	ctx.moveTo(lastX,lastY);
-	ctx.lineTo(currX,currY);
+	//updateDrawDots(lastX, lastY);
+	updateDrawDots(currX, currY);
+	ctx.moveTo(drawDots[0].x,drawDots[0].y);
+	for(var i =0; i<drawDots.length;i++){
+		ctx.lineTo(drawDots[i].x,drawDots[i].y);
+	}
 	ctx.stroke();
 	lastX = currX;
 	lastY = currY;
@@ -143,6 +165,7 @@ function findxy(res, e) {
         if (res == 'up' || res == "out") {
 			//updateHistory();
             flag = false;
+			drawDots = [];
 			send("stop");
 			updateHistory();
 			clearFutureHistory();

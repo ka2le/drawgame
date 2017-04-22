@@ -61,7 +61,7 @@ function doSocketMessage( message ) {
 
 
 //------------------------------------------------Canvas----------------------------------------------------------------------------------------------------------------------------------------------
-function draw(){
+/* function draw(){
 	ctx.beginPath();
 	ctx.moveTo(lastX,lastY);
 	ctx.lineTo(currX,currY);
@@ -69,7 +69,7 @@ function draw(){
 	lastX = currX;
 	lastY = currY;
 }
-
+ */
 function initCommonJquery(){
 		$(".menuButton").click(function() {
         toggleMenu();

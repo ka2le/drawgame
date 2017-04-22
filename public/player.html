@@ -55,11 +55,11 @@
 				
 				<div id="sideMenu">
 					
-					<input type="button" class="sideMenuButton no-zoom thin" onclick="changeDrawSize('1')" value="l">
-					<input type="button" class="sideMenuButton no-zoom thick" onclick="changeDrawSize('5')" value="I">
+					<input type="button" class="sideMenuButton no-zoom btn thin" onclick="changeDrawSize('1')" value="-">
+					<input type="button" class="sideMenuButton no-zoom btn thin" onclick="changeDrawSize('5')" value="+">
 					<button onclick="changeColorToPalette()" id="paletteButton" class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'} colorSelector sideMenuButton no-zoom ">
-					
-						Palette
+						Color
+						
 					</button>
 					
 				<!-- 	<input type="button" class="sideMenuButton no-zoom red" onclick="changeDrawColor('red')" value="">
@@ -69,11 +69,15 @@
 					<input type="button" class="sideMenuButton no-zoom purple" onclick="changeDrawColor('purple')" value="">
 					<input type="button" class="sideMenuButton no-zoom brown" onclick="changeDrawColor('brown')" value="">
 					<input type="button" class="sideMenuButton no-zoom white" onclick="changeDrawColor('white')" value=""> -->
-					<input type="button" class="sideMenuButton no-zoom black" onclick="changeDrawColor('black')" value="">
-					<input type="button" class="sideMenuButton no-zoom thick" onclick="undo()" value="↶">
-					<input type="button" class="sideMenuButton no-zoom thick" onclick="redo()" value="↷">
-					<input type="button" class="sideMenuButton no-zoom clear" onclick="clearCanvas()" value="Clear">
-					<input type="button" class="sideMenuButton no-zoom clear" onclick="fillCanvas()" value="Fill">
+					<input type="button" class="sideMenuButton no-zoom btn black" onclick="changeDrawColor('black')" value="">
+					<input type="button" class="sideMenuButton no-zoom btn thick" onclick="undo()" value="↶">
+					<input type="button" class="sideMenuButton no-zoom btn thick" onclick="redo()" value="↷">
+					<button class="sideMenuButton btn no-zoom " onclick="clearCanvas()">
+					
+						<img src="img/clear.png">
+					</button>
+				<!-- 	<input type="button" class="sideMenuButton no-zoom btn clear" onclick="clearCanvas()" value="Clear"> -->
+					<input type="button" class="sideMenuButton no-zoom btn clear" onclick="fillCanvas()" value="Fill">
 				</div>
 				<canvas id="theCanvas" class="no-zoom"></canvas>
 				

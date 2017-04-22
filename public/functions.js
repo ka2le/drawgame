@@ -166,6 +166,9 @@ function updateGameInfo(text){
 //------------------------------------------------Canvas stuff----------------------------------------------------------------------------------------------------------------------------------------------
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+	ctx.fillStyle = drawColor;
 }
 function fillCanvas(){
 	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
@@ -189,7 +192,29 @@ function changeDrawColor(rgb){
 		}
 		
 //------------------------------------------------Draw----------------------------------------------------------------------------------------------------------------------------------------------
+var drawDots = [];
+var drawDotsMemory = 30;
+function updateDrawDots(newX,newY){
+	var newDot = []
+	newDot.x = newX;
+	newDot.y = newY;
+	drawDots.push(newDot);
+	if(drawDots.length>drawDotsMemory){
+		drawDots.splice(0,1);
+	}
+}
+function draw(){
+	ctx.beginPath();
+	updateDrawDots(currX, currY);
+	ctx.moveTo(drawDots[0].x,drawDots[0].y);
+	for(var i =0; i<drawDots.length;i++){
+		ctx.lineTo(drawDots[i].x,drawDots[i].y);
+	}
+	ctx.stroke();
+	lastX = currX;
+	lastY = currY;
 
+}
 function findxy(res, e) {
         if (res == 'down') {
             currX = e.clientX - canvas.offsetLeft;
@@ -200,7 +225,8 @@ function findxy(res, e) {
 			//sendCurrentXY();
         }
         if (res == 'up' || res == "out") {
-            flag = false;	
+            flag = false;
+			drawDots = [];			
         }
         if (res == 'move') {
             if (flag) {
@@ -246,6 +272,9 @@ function handleInput(data){
 		if(intent=="userCanvas"){
 			userWidth = data.value;
 			userHeight = data.value2;
+			canvasWidth = userWidth;
+			canvasHeight = userHeight;
+			updateCanvasVariables();
 			console.log(userWidth+"<userWidth userHeight>"+userHeight);
 		}
 		if(intent=="changeDrawSize"){
