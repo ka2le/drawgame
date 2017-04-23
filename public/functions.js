@@ -193,6 +193,7 @@ function changeDrawSize(width){
 var img = new Image();
 function drawImgData(imgData){
 	//clearCanvas();
+	console.log("drawImgData");
 	img.src = imgData;
 	img.onload = function() {
 		ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
@@ -360,7 +361,7 @@ function sendCurrentXY(){
 //------------------------------------------------Jquery----------------------------------------------------------------------------------------------------------------------------------------------
 
 function jQueryInits(){
-	canvas.addEventListener("mousemove", function (e) {
+	/* canvas.addEventListener("mousemove", function (e) {
             findxy('move', e)
         }, false);
         canvas.addEventListener("mousedown", function (e) {
@@ -371,7 +372,7 @@ function jQueryInits(){
         }, false);
         canvas.addEventListener("mouseout", function (e) {
             findxy('out', e)
-        }, false);
+        }, false); */
 	$( "#menuContainer" ).click(function( event ) {
 		event.stopPropagation();
 		// Do something
