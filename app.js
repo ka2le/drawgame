@@ -33,7 +33,20 @@ var player1 = "";
 var player2 = "";
 var failedSend = []
 var allowedStrikes = 2;
+var rooms = [];
 
+function addToRoom(newClient, ip){
+	for(var i =0; i<rooms.length; i++){
+		if(rooms[i].ip == ip){
+			rooms[i].clients.push(newClient);
+		}else{
+			var newRoom = [];
+			newRoom.ip = ip;
+			newRoom.clients = [];
+			newRoom.clients.push(newClient);
+		}
+	}
+}
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
@@ -59,11 +72,14 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	var res = message.substring(0, 2);
-	console.log(res);
+	//console.log(res);
 	console.log(message);
 	if(res=="IP"){
 		console.log("IP");
-		console.log(message.split("IP")[0]);
+		var theIP = message.split("IP")[1];
+		console.log(theIP);
+		addToRoom(client, theIP);
+		console.log(rooms);
 	}else{
 		broadcast(message);
 	}

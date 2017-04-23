@@ -42,18 +42,24 @@ function onload(){
 	createPlayers();
 	console.log(players);
 	//console.log(getNewWord());
-	console.log("hej");
+	if(window.location.host=="localhost:4330"){
+		continueOnload();
+	}
 	 
 }
 
 function continueOnload(){
 	//console.log("continueOnload does nothing now on host.");
 	send("hostLoaded");
-	$.getJSON("http://jsonip.com/?callback=?", function (data) {
-        console.log(data);
-		sendToServer("IP"+data.ip);
-        //alert(data.ip);
-    });
+	console.log("hej");
+	 $(function() {
+    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+      function(json) {
+        console.log("My public IP address is: ", json.ip);
+		sendToServer("IP"+json.ip);
+      }
+    );
+  });
 }
 function resetVariables(){
 	lastX = 0;
