@@ -92,8 +92,8 @@ sockets.on( 'connection', function( client ) {
 		var intent = jsonMessageData.intent;
 		console.log("intent:"+intent);
 		if(intent=="serverTalk"){
-			var messageType = data.value;
-			var messageData = data.value2;
+			var messageType = jsonMessageData.value;
+			var messageData = jsonMessageData.value2;
 			if(messageType=="IP"){
 				var randomNumber = addToRoom(client, theIP);
 				//client.send(createServerMessage("randomNumber", randomNumber))
