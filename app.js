@@ -43,21 +43,23 @@ sockets.on( 'connection', function( client ) {
  // failedSend.push(0);
   console.log("------------------clients------------------------");
   console.log(client);
-  console.log("------------------1-----------------------------------");
+ // console.log("------------------1-----------------------------------");
   //var ip = client.header('x-forwarded-for') || req.connection.remoteAddress;
   // var address = sockets.handshake.address;
  //  console.log('New connection from ' + address.address + ':' + address.port);
   //console.log(client[0]);
   //console.log(client.Socket);
-   console.log("------------------2----------------------------------");
+   //console.log("------------------2----------------------------------");
   //console.log(client.Server);
-  console.log("------------------3----------------------------------");
-  console.log(client.Websocket);
-  console.log("------------------4---------------------------------");
-  console.log(client.headers);
+ // console.log("------------------3----------------------------------");
+  //console.log(client.Websocket);
+  //console.log("------------------4---------------------------------");
+  //console.log(client.headers);
   //console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
+	var res = message.substring(0, 10);
+	console.log(res);
 	console.log(message);
 	broadcast(message);
 

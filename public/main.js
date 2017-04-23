@@ -28,6 +28,9 @@ function reconnect(){
 		 handleReconnect();
 	};
 }
+function talkToServer(){
+	socket.send("Heeeeeeeeej12345");
+}
 function send(intent, value, value2){
 	if(window.location.host=="localhost:4330" || window.location.host=="localhost"){
 			/* console.log("sent");
