@@ -183,7 +183,7 @@ function updateCanvasSize(){
 }
 function updateCanvas100(){
 	canvas.style.height = document.documentElement.clientHeight;
-	canvas.style.width = cdocument.documentElement.clientWidth;
+	canvas.style.width = document.documentElement.clientWidth;
 }
 function changeDrawSize(width){
 
