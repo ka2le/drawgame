@@ -41,6 +41,7 @@ function addToRoom(newClient, ip){
 		if(rooms[i].ip == ip){
 			foundRoom = true;
 			rooms[i].clients.push(newClient);
+		}
 	}
 	if(!foundRoom){
 		var newRoom = [];
