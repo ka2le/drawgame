@@ -45,7 +45,7 @@ sockets.on( 'connection', function( client ) {
   console.log(client);
   console.log("------------------IP-----------------------------------");
   //var ip = client.header('x-forwarded-for') || req.connection.remoteAddress;
-   var address = client.handshake.address;
+   var address = sockets.handshake.address;
    console.log('New connection from ' + address.address + ':' + address.port);
   //console.log(client[0]);
   //console.log(clients);
