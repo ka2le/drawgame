@@ -43,8 +43,9 @@ sockets.on( 'connection', function( client ) {
  // failedSend.push(0);
   console.log("------------------clients------------------------");
   console.log(client);
-  console.log("------------------clients.headers------------------------");
-  console.log(client.headers);
+  console.log("------------------IP-----------------------------------");
+  var ip = client.header('x-forwarded-for') || req.connection.remoteAddress;
+  console.log(ip);
   //console.log(clients);
   //console.log(clients[0]);
   // Echo messages to all clients
