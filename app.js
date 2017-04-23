@@ -41,7 +41,7 @@ function addToRoom(newClient, ip){
 		if(rooms[i].ip == ip){
 			foundRoom = true;
 			rooms[i].clients.push(newClient);
-			return rooms[i].randomNumber;
+			return [rooms[i].randomNumber, false];
 		}
 	}
 	if(!foundRoom){
@@ -51,7 +51,7 @@ function addToRoom(newClient, ip){
 		newRoom.clients.push(newClient);
 		newRoom.randomNumber =  Math.floor(Math.random() * 9999) + 1;
 		rooms.push(newRoom);
-		return randomNumber;
+		return [newRoom.randomNumber, true];
 	}
 }
 
@@ -62,21 +62,7 @@ sockets.on( 'connection', function( client ) {
   clients.push(client);
  // failedSend.push(0);
   console.log("------------------clients------------------------");
-  console.log(client);
- // console.log("------------------1-----------------------------------");
-  //var ip = client.header('x-forwarded-for') || req.connection.remoteAddress;
-  // var address = sockets.handshake.address;
- //  console.log('New connection from ' + address.address + ':' + address.port);
-  //console.log(client[0]);
-  //console.log(client.Socket);
-   //console.log("------------------2----------------------------------");
-  //console.log(client.Server);
- // console.log("------------------3----------------------------------");
-  //console.log(client.Websocket);
-  //console.log("------------------4---------------------------------");
-  //console.log(client.headers);
-  //console.log(clients[0]);
-  // Echo messages to all clients
+ // console.log(client);
   client.on( 'message', function( message ) {
 	var res = message.substring(0, 2);
 	//console.log(res);
@@ -95,8 +81,10 @@ sockets.on( 'connection', function( client ) {
 			var messageType = jsonMessageData.value;
 			var messageData = jsonMessageData.value2;
 			if(messageType=="IP"){
-				var randomNumber = addToRoom(client, messageData);
-				client.send(createServerMessage("randomNumber", randomNumber))
+				var roomInfo = addToRoom(client, messageData);
+				var randomNumber = roomInfo[0];
+				var isNewRoom = roomInfo[1];
+				client.send(createServerMessage("addedToRoom",randomNumber ,isNewRoom))
 			}
 		}else{
 			broadcast(message);
@@ -125,11 +113,12 @@ function broadcast(text){
 		}	 
     }
 }
-function createServerMessage(serverIntent, data){
+function createServerMessage(serverIntent, data, data2){
 			var message = {
 			intent: "serverTalk",
 			  value: serverIntent,
 			  value2: data,
+			  value3: data2,
 			  sender: "server",
 			  playerNumber: -1
 			};

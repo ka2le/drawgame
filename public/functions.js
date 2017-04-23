@@ -271,16 +271,20 @@ function findxy(res, e) {
     }
 
 //-------------------------------------------------Handle Input-----------------------------------------------------------------------------------------------------------------------------------------------
-function handleServerTalk(intent, data){
+function handleServerTalk(intent, data, data2){
 	console.log("server wants "+ intent);
 	console.log("data "+data);
-	
+	console.log("data2 "+data2);
+	if(intent=="addedToRoom"){
+		var roomId = data;
+		var isNewRoom = data2;
+	}
 }	
 function handleInput(data){
 	var intent = data.intent;
 	if(intent=="serverTalk"){
 		console.log("serverTalk");
-		handleServerTalk(data.value, data.value2);
+		handleServerTalk(data.value, data.value2, data.value3);
 	}
 	if(intent=="reconnect" || intent=="iAmReady"){
 		//send("canvasSize", canvasWidth, canvasHeight);
