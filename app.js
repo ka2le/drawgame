@@ -48,9 +48,13 @@ sockets.on( 'connection', function( client ) {
   // var address = sockets.handshake.address;
  //  console.log('New connection from ' + address.address + ':' + address.port);
   //console.log(client[0]);
-  console.log(client.Socket);
+  //console.log(client.Socket);
    console.log("------------------2----------------------------------");
-  console.log(client.Server);
+  //console.log(client.Server);
+  console.log("------------------3----------------------------------");
+  console.log(client.Websocket);
+  console.log("------------------4---------------------------------");
+  console.log(client.headers);
   //console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
