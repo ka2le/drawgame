@@ -44,6 +44,7 @@ function addToRoom(newClient, ip){
 			newRoom.ip = ip;
 			newRoom.clients = [];
 			newRoom.clients.push(newClient);
+			rooms.push(newRoom);
 		}
 	}
 }
