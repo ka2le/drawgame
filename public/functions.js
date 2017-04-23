@@ -50,16 +50,16 @@ function onload(){
 
 function continueOnload(){
 	//console.log("continueOnload does nothing now on host.");
-	send("hostLoaded");
 	console.log("hej");
 	 $(function() {
     $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
       function(json) {
         console.log("My public IP address is: ", json.ip);
-		sendToServer("IP"+json.ip);
+		send("serverTalk", "IP", json.ip);
       }
     );
   });
+  send("hostLoaded");
 }
 function resetVariables(){
 	lastX = 0;
@@ -271,9 +271,17 @@ function findxy(res, e) {
     }
 
 //-------------------------------------------------Handle Input-----------------------------------------------------------------------------------------------------------------------------------------------
-
+function handleServerTalk(intent, data){
+	console.log("server wants "+ intent);
+	console.log("data "+data);
+	
+}	
 function handleInput(data){
 	var intent = data.intent;
+	if(intent=="serverTalk"){
+		console.log("serverTalk");
+		handleServerTalk(data.value, data.value2);
+	}
 	if(intent=="reconnect" || intent=="iAmReady"){
 		//send("canvasSize", canvasWidth, canvasHeight);
 		var thisplayerNumber = data.playerNumber;

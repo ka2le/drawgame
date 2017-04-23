@@ -41,6 +41,7 @@ function addToRoom(newClient, ip){
 		if(rooms[i].ip == ip){
 			foundRoom = true;
 			rooms[i].clients.push(newClient);
+			return rooms[i].randomNumber;
 		}
 	}
 	if(!foundRoom){
@@ -48,7 +49,9 @@ function addToRoom(newClient, ip){
 		newRoom.ip = ip;
 		newRoom.clients = [];
 		newRoom.clients.push(newClient);
+		newRoom.randomNumber =  Math.floor(Math.random() * 9999) + 1;
 		rooms.push(newRoom);
+		return randomNumber;
 	}
 }
 
@@ -88,7 +91,16 @@ sockets.on( 'connection', function( client ) {
 		var jsonMessageData = JSON.parse( message )
 		var intent = jsonMessageData.intent;
 		console.log("intent:"+intent);
-		broadcast(message);
+		if(intent=="serverTalk"){
+			var messageType = data.value;
+			var messageData = data.value2;
+			if(messageType=="IP"){
+				var randomNumber = addToRoom(client, theIP);
+				client.send(createServerMessage("randomNumber", randomNumber))
+			}
+		}else{
+			broadcast(message);
+		}
 	}
 	
 	
@@ -99,7 +111,7 @@ sockets.on( 'connection', function( client ) {
       console.log('Got disconnect!');
       var i = clients.indexOf(socket);
       clients.splice(i, 1);
-	  broadcast( createMessage("someoneDC"));
+	 // broadcast( createMessage("someoneDC"));
    });
 } );
 function broadcast(text){
@@ -112,6 +124,17 @@ function broadcast(text){
 			//sendTo(client, forSender);
 		}	 
     }
+}
+function createServerMessage(serverIntent, data){
+			var message = {
+			intent: "serverTalk",
+			  value: serverIntent,
+			  value2: data,
+			  sender: "server",
+			  playerNumber: -1
+			};
+			var message =  JSON.stringify( message ) ;
+			return message
 }
 function createMessage(text){
 	return '{"content":"'+text+'"}';
