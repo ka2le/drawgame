@@ -42,6 +42,7 @@ sockets.on( 'connection', function( client ) {
   clients.push(client);
  // failedSend.push(0);
   console.log("------------------clients------------------------");
+  console.log(client)
   //console.log(clients);
   //console.log(clients[0]);
   // Echo messages to all clients

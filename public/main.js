@@ -5,7 +5,7 @@ function startConnection(){
 	if(window.location.host=="localhost:4330" || window.location.host=="localhost"){
 		console.log("WebSocket is not used on localhost");
 	}else{
-		socket = new WebSocket( 'wss://' + window.location.host );  
+		socket = new WebSocket( 'wss://' + window.location.host +"?1337" );  
 		socket.addEventListener( 'message', doSocketMessage );
 		console.log(socket);
 		socket.onopen = function () {
