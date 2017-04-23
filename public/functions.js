@@ -25,6 +25,7 @@ var words = ["apple", "frog", "tree","nose", "cloud", "gun", "motorcycle","straw
  "tank", "lemon", "recycle", "deep", "point", "safe", "download", "speakers", "avocado", "birthday", "dream", "sushi", "dolphin", "owl", "baby", "face", "round", "key", "watch", "mailbox", "saw", "stove", "grill", "rainbow", "pear",
  "mushroom", "sheep", "cake", "shark", "pirate", "trumpet", "coin", "tennis", "fork", "bomb", "map", "glasses", "bear", "airplane", "heart", "moon", "lamp", "balloon", "crab", "cat", "lion", "hamburger", "chair", "candle", "lips", "whale"];
 var currentWord;
+var roomID = -1;
 
 function onload(){
 	//console.log("start");
@@ -276,7 +277,7 @@ function handleServerTalk(intent, data, data2){
 	console.log("data "+data);
 	console.log("data2 "+data2);
 	if(intent=="addedToRoom"){
-		var roomId = data;
+		roomID = data;
 		var isNewRoom = data2;
 	}
 }	

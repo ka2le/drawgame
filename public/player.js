@@ -18,6 +18,9 @@ var availableRedos;
 var howMuchRedo = 30;
 var paletteColor = "white"
 var androidOffset = false;
+var roomID = -1;
+
+
 function onload(){
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];

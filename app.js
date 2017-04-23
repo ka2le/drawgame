@@ -34,14 +34,14 @@ var player2 = "";
 var failedSend = []
 var allowedStrikes = 2;
 var rooms = [];
-
+//-------------------------------------------------Room Stuff-----------------------------------------------------------------------------------------------------------------------------------------------
 function addToRoom(newClient, ip){
 	var foundRoom = false;
 	for(var i =0; i<rooms.length; i++){
 		if(rooms[i].ip == ip){
 			foundRoom = true;
 			rooms[i].clients.push(newClient);
-			return [rooms[i].randomNumber, false];
+			return [rooms[i].roomID, false];
 		}
 	}
 	if(!foundRoom){
@@ -49,12 +49,23 @@ function addToRoom(newClient, ip){
 		newRoom.ip = ip;
 		newRoom.clients = [];
 		newRoom.clients.push(newClient);
-		newRoom.randomNumber =  Math.floor(Math.random() * 9999) + 1;
+		newRoom.roomID =  createRoomID()
 		rooms.push(newRoom);
-		return [newRoom.randomNumber, true];
+		return [newRoom.roomID, true];
 	}
 }
-
+function createRoomID(){
+	//ska uppdateras så att den kollar så det inte finns osv.
+	return Math.floor(Math.random() * 9999) + 1;
+}
+function findRoom(roomID){
+	for(var i =0; i<rooms.length; i++){
+		if(rooms[i].roomID == roomID){
+			return rooms[i];
+		}
+	}
+}
+//-------------------------------------------------HSocket Stuff-----------------------------------------------------------------------------------------------------------------------------------------------
 // Listeners
 sockets.on( 'connection', function( client ) {  
   // Debug
@@ -67,28 +78,22 @@ sockets.on( 'connection', function( client ) {
 	var res = message.substring(0, 2);
 	//console.log(res);
 	console.log(message);
-	if(res=="IP"){
-		console.log("IP");
-		var theIP = message.split("IP")[1];
-		console.log(theIP);
-		addToRoom(client, theIP);
-		console.log(rooms);
-	}else{
-		var jsonMessageData = JSON.parse( message )
-		var intent = jsonMessageData.intent;
-		console.log("intent:"+intent);
-		if(intent=="serverTalk"){
-			var messageType = jsonMessageData.value;
-			var messageData = jsonMessageData.value2;
-			if(messageType=="IP"){
-				var roomInfo = addToRoom(client, messageData);
-				var randomNumber = roomInfo[0];
-				var isNewRoom = roomInfo[1];
-				client.send(createServerMessage("addedToRoom",randomNumber ,isNewRoom))
-			}
-		}else{
-			broadcast(message);
+	var jsonMessageData = JSON.parse( message )
+	var intent = jsonMessageData.intent;
+	console.log("intent:"+intent);
+	if(intent=="serverTalk"){
+		var messageType = jsonMessageData.value;
+		var messageData = jsonMessageData.value2;
+		if(messageType=="IP"){
+			var roomInfo = addToRoom(client, messageData);
+			var randomNumber = roomInfo[0];
+			var isNewRoom = roomInfo[1];
+			client.send(createServerMessage("addedToRoom",randomNumber ,isNewRoom));
+			//client.roomID = randomNumber;
 		}
+	}else{
+		var roomID = jsonMessageData.roomID;
+		broadcast(message, roomID);
 	}
 	
 	
@@ -102,10 +107,20 @@ sockets.on( 'connection', function( client ) {
 	 // broadcast( createMessage("someoneDC"));
    });
 } );
-function broadcast(text){
-	 for( var i = 0; i < clients.length; i++ ) {
+function broadcast(text, roomID){
+	/*  for( var i = 0; i < clients.length; i++ ) {
 		try{
 			clients[i].send( text ); 
+		}catch(err){
+			console.log("Could not send to Client " + i + " error: " +err);
+			//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
+			//sendTo(client, forSender);
+		}	 
+    } */
+	var roomClients = findRoom(roomID).clients;
+	for( var i = 0; i < roomClients.length; i++ ) {
+		try{
+			roomClients[i].send( text ); 
 		}catch(err){
 			console.log("Could not send to Client " + i + " error: " +err);
 			//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);

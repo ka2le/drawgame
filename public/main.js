@@ -48,7 +48,8 @@ function send(intent, value, value2){
 			  value: value,
 			  value2: value2,
 			  sender: role,
-			  playerNumber: playerNumber
+			  playerNumber: playerNumber,
+			  roomID: roomID
 			};
 			socket.send( JSON.stringify( message ) );	
 		}
