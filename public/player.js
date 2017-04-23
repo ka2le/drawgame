@@ -188,7 +188,7 @@ function findxy(res, e) {
 			var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
 			//console.log(currX +"<x y>" +currY +" "+canvasHeight+"<H W>"+canvasWidth);
 			send("start", value);
-			send("userCanvas", canvasWidth, canvasHeight);
+			
 			sendCurrentXY();
 			
         }
@@ -200,6 +200,7 @@ function findxy(res, e) {
 			updateHistory();
 			clearFutureHistory();
 			var val = "";
+			send("userCanvas", canvasWidth, canvasHeight);
 			//val += parseInt(currX) +"x y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth;
 			//document.getElementById("playerNumber").innerHTML = ""+val;
         }
