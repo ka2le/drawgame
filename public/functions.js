@@ -60,7 +60,10 @@ function continueOnload(){
       }
     );
   });
-  send("hostLoaded");
+  
+}
+function continueOnload2(){
+	send("hostLoaded");
 }
 function resetVariables(){
 	lastX = 0;
@@ -279,6 +282,7 @@ function handleServerTalk(intent, data, data2){
 	if(intent=="addedToRoom"){
 		roomID = data;
 		var isNewRoom = data2;
+		continueOnload2();
 	}
 }	
 function handleInput(data){
