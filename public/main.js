@@ -91,11 +91,20 @@ function initCanvasVariables(){
 	ctx.fillStyle = drawColor;
 	ctx.strokeStyle = drawColor;
 }
+var tempImgData;
+function saveImg(){
+	tempImgData = ctx.getImageData(0,0,canvasWidth,canvasHeight);
+}
+function loadSavedImg(){
+	ctx.putImageData(tempImgData,0,0);
+}
 function updateCanvasVariables(){
+	saveImg();
 	canvas.height = canvasHeight;
 	canvas.width = canvasWidth;
 	ctx.lineWidth=lineWidth;
 	ctx.fillStyle = drawColor;
+	loadSavedImg();
 }
 
 

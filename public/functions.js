@@ -294,7 +294,7 @@ function handleInput(data){
 				userHeight = data.value2;
 				canvasWidth = userWidth;
 				canvasHeight = userHeight;
-				//updateCanvasVariables();
+				updateCanvasVariables();
 				console.log(userWidth+"<userWidth userHeight>"+userHeight);
 			}
 			if(intent=="changeDrawSize"){
