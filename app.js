@@ -95,8 +95,8 @@ sockets.on( 'connection', function( client ) {
 			var messageType = jsonMessageData.value;
 			var messageData = jsonMessageData.value2;
 			if(messageType=="IP"){
-				var randomNumber = addToRoom(client, theIP);
-				//client.send(createServerMessage("randomNumber", randomNumber))
+				var randomNumber = addToRoom(client, messageData);
+				client.send(createServerMessage("randomNumber", randomNumber))
 			}
 		}else{
 			broadcast(message);
