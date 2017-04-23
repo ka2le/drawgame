@@ -85,6 +85,9 @@ sockets.on( 'connection', function( client ) {
 		addToRoom(client, theIP);
 		console.log(rooms);
 	}else{
+		var jsonMessageData = JSON.parse( message )
+		var intent = jsonMessageData.intent;
+		console.log("intent:"+intent);
 		broadcast(message);
 	}
 	
