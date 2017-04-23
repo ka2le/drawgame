@@ -188,8 +188,9 @@ function findxy(res, e) {
 			var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
 			//console.log(currX +"<x y>" +currY +" "+canvasHeight+"<H W>"+canvasWidth);
 			send("start", value);
-			
+			send("userCanvas", canvasWidth, canvasHeight);
 			sendCurrentXY();
+			
         }
         if (res == 'up' || res == "out") {
 			//updateHistory();
