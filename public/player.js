@@ -17,6 +17,7 @@ var imgHistory  = [];
 var availableRedos;
 var howMuchRedo = 30;
 var paletteColor = "white"
+var androidOffset = false;
 function onload(){
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
@@ -95,7 +96,15 @@ function updateCanvasSize(){
 
 function updateDiffY(){
 	diffY = 0;
-	//console.log("diffY "+diffY);
+	if(androidOffset){
+		var totalDiff = canvasHeight-currY;
+		var relation = 1-(totalDiff/canvasHeight);
+		var maxChange = 80;
+		var val = "";
+		diffY = Math.floor(relation*maxChange);
+		//val += relation +"relation y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth+ " diffY "+ diffY;
+		//document.getElementById("playerNumber").innerHTML = ""+val;
+	}
 }
 
 function setTextColor(picker) {
@@ -170,14 +179,16 @@ function findxy(res, e) {
         if (res == 'down') {
 			//document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
 			// updateHistory();
+			updateDiffY();
             currX = e.pageX - canvas.offsetLeft;
             currY = e.pageY - canvas.offsetTop-diffY;
 			lastX = currX;
 			lastY = currY;
             flag = true;
 			var value = addZeroes(parseInt(currX))+""+addZeroes(parseInt(currY));
-			console.log(currX +"<x y>" +currY +" "+canvasHeight+"<H W>"+canvasWidth);
+			//console.log(currX +"<x y>" +currY +" "+canvasHeight+"<H W>"+canvasWidth);
 			send("start", value);
+			
 			sendCurrentXY();
         }
         if (res == 'up' || res == "out") {
@@ -188,11 +199,12 @@ function findxy(res, e) {
 			updateHistory();
 			clearFutureHistory();
 			var val = "";
-			val += parseInt(currX) +"x y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth;
-			document.getElementById("playerNumber").innerHTML = ""+val;
+			//val += parseInt(currX) +"x y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth;
+			//document.getElementById("playerNumber").innerHTML = ""+val;
         }
         if (res == 'move') {
             if (flag) {
+				updateDiffY();
                 currX = e.pageX - canvas.offsetLeft;
                 currY = e.pageY - canvas.offsetTop-diffY;
 				sendCurrentXY();
@@ -403,6 +415,13 @@ function initJquery(){
 		event.stopPropagation();
 		toggleMenu();
 	});
+	$("#androidOffset").click(function() {
+        if($(this).is(":checked")){
+			androidOffset = true;
+		}else{
+			androidOffset = false;
+		}
+    });
 	$( window ).scroll(function() {
 		  updateCanvasSize();
 		  if( yourTurn){
@@ -426,7 +445,9 @@ function initJquery(){
 			findxy('move', e.touches[0])
         }, false);
         canvas.addEventListener("touchstart", function (e) {
+			//console.log(e);
 			e.preventDefault();
+			//document.getElementById("playerNumber").innerHTML = canvas.offsetTop;
 		//	var values= "diffY " +diffY+ " canvasHeight" + canvasHeight;
 			//	document.getElementById("playerNumber").innerHTML = values;
             findxy('down', e.touches[0])
