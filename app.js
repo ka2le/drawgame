@@ -36,16 +36,18 @@ var allowedStrikes = 2;
 var rooms = [];
 
 function addToRoom(newClient, ip){
+	var foundRoom = false;
 	for(var i =0; i<rooms.length; i++){
 		if(rooms[i].ip == ip){
+			foundRoom = true;
 			rooms[i].clients.push(newClient);
-		}else{
-			var newRoom = [];
-			newRoom.ip = ip;
-			newRoom.clients = [];
-			newRoom.clients.push(newClient);
-			rooms.push(newRoom);
-		}
+	}
+	if(!foundRoom){
+		var newRoom = [];
+		newRoom.ip = ip;
+		newRoom.clients = [];
+		newRoom.clients.push(newClient);
+		rooms.push(newRoom);
 	}
 }
 
