@@ -271,7 +271,7 @@ function handleInput(data){
 		handleDrawMessage(value);
 		//console.log("drawing");
 	}else{
-		console.log("intent" + intent);
+		//console.log("intent" + intent);
 		//console.log();
 		if(intent=="start"){
 			flag = true;
@@ -295,7 +295,7 @@ function handleInput(data){
 				canvasWidth = userWidth;
 				canvasHeight = userHeight;
 				updateCanvasVariables();
-				console.log(userWidth+"<userWidth userHeight>"+userHeight);
+				//console.log(userWidth+"<userWidth userHeight>"+userHeight);
 			}
 			if(intent=="changeDrawSize"){
 				changeDrawSize(data.value);
@@ -438,7 +438,7 @@ function hideMenu(){
 function testDraw(){
 	//toggleMenu();
 	var message = "00340150";
-	console.log(message.length);
+	//console.log(message.length);
 	doSocketMessage(message);
 }
 function testplayerJoin(playerId){

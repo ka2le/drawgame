@@ -102,6 +102,8 @@ function updateDiffY(){
 		var maxChange = 80;
 		var val = "";
 		diffY = Math.floor(relation*maxChange);
+	//	console.log("currY "+currY);
+	//	console.log("diffY "+diffY);
 		//val += relation +"relation y" +parseInt(currY) +" "+canvasHeight+"H W"+canvasWidth+ " diffY "+ diffY;
 		//document.getElementById("playerNumber").innerHTML = ""+val;
 	}
@@ -111,7 +113,7 @@ function setTextColor(picker) {
 		//document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
 		var newColor = '#' + picker.toString();
 		paletteColor = newColor;
-		console.log(newColor);
+		//console.log(newColor);
 		changeDrawColor(newColor);
 	}
 function changeColorToPalette(){
@@ -179,7 +181,10 @@ function findxy(res, e) {
         if (res == 'down') {
 			//document.getElementById("playerNumber").innerHTML = ("Player: "+(canvas.offsetTop));
 			// updateHistory();
+		//	console.log("down");
+			currY = e.pageY - canvas.offsetTop;
 			updateDiffY();
+			//diffY=0;
             currX = e.pageX - canvas.offsetLeft;
             currY = e.pageY - canvas.offsetTop-diffY;
 			lastX = currX;
@@ -206,6 +211,7 @@ function findxy(res, e) {
         }
         if (res == 'move') {
             if (flag) {
+			//	console.log("move");
 				updateDiffY();
                 currX = e.pageX - canvas.offsetLeft;
                 currY = e.pageY - canvas.offsetTop-diffY;
@@ -488,7 +494,7 @@ function initJquery(){
  
 function toggleMenu(){
 		$("#nav-icon3").toggleClass('open');
-		console.log("menu");
+		//console.log("menu");
 		if($("#menu").is(":visible")){
 			$("#menu").slideUp(200);
 		}else{
@@ -497,7 +503,7 @@ function toggleMenu(){
 }
 function toggleSideMenu(){
 		//$("#nav-icon3").toggleClass('open');
-		console.log("sideMenu");
+		//console.log("sideMenu");
 		if($("#sideMenu").is(":visible")){
 			$("#sideMenu").hide(200);
 			window.setTimeout(function() {
