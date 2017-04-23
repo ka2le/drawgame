@@ -97,14 +97,6 @@ function updateCanvasVariables(){
 	ctx.lineWidth=lineWidth;
 	ctx.fillStyle = drawColor;
 }
-function updateCanvasSize(){
-	canvasWidth = document.documentElement.clientWidth;
-	canvasHeight = document.documentElement.clientHeight;
-	//canvasWidth = screen.width;
-	//canvasHeight = screen.height;
-	canvas.height = canvasHeight;
-	canvas.width = canvasWidth;
-}
 
 
 //---------------------------------------------Other---------------------------------------------------------------------------------------------------------------------------------------------------------

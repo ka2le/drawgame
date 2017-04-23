@@ -173,6 +173,18 @@ function clearCanvas(){
 function fillCanvas(){
 	ctx.fillRect(0, 0, canvasWidth, canvasHeight); // clear canvas
 }
+function updateCanvasSize(){
+	canvasWidth = document.documentElement.clientWidth;
+	canvasHeight = document.documentElement.clientHeight;
+	//canvasWidth = screen.width;
+	//canvasHeight = screen.height;
+	canvas.height = canvasHeight;
+	canvas.width = canvasWidth;
+}
+function updateCanvas100(){
+	canvas.style.height = document.documentElement.clientHeight;
+	canvas.style.width = cdocument.documentElement.clientWidth;
+}
 function changeDrawSize(width){
 
 	lineWidth= width;
@@ -372,7 +384,8 @@ function jQueryInits(){
 		}
     });
 	$(window).resize(function () {
-		updateCanvasSize();
+		//updateCanvasSize();
+		updateCanvas100();
 		updateToCurrentState();
 		updateCanvasVariables();
 		//send("canvasSize", canvasWidth, canvasHeight);

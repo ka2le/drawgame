@@ -84,6 +84,15 @@ function changeDrawSize(width){
 	ctx.lineWidth=lineWidth;
 	send("changeDrawSize",lineWidth );
 }
+function updateCanvasSize(){
+	canvasWidth = document.documentElement.clientWidth;
+	canvasHeight = document.documentElement.clientHeight;
+	//canvasWidth = screen.width;
+	//canvasHeight = screen.height;
+	canvas.height = canvasHeight;
+	canvas.width = canvasWidth;
+}
+
 function updateDiffY(){
 	diffY = 0;
 	//console.log("diffY "+diffY);
