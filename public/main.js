@@ -103,7 +103,9 @@ function updateCanvasVariables(){
 	canvas.height = canvasHeight;
 	canvas.width = canvasWidth;
 	ctx.lineWidth=lineWidth;
+	console.log("drawColor"+drawColor);
 	ctx.fillStyle = drawColor;
+	ctx.strokeStyle = drawColor;
 	loadSavedImg();
 }
 
