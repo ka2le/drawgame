@@ -287,6 +287,7 @@ function handleServerTalk(intent, data, data2){
 }	
 function handleInput(data){
 	var intent = data.intent;
+	console.log(data);
 	if(intent=="serverTalk"){
 		console.log("serverTalk");
 		handleServerTalk(data.value, data.value2, data.value3);
