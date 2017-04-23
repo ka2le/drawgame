@@ -58,10 +58,18 @@ sockets.on( 'connection', function( client ) {
   //console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
-	var res = message.substring(0, 10);
+	var res = message.substring(0, 2);
 	console.log(res);
 	console.log(message);
-	broadcast(message);
+	if(res=="IP"){
+		console.log("IP");
+		console.log(message.split("IP")[0]);
+	}else{
+		broadcast(message);
+	}
+	
+	
+	
 
   } );
    client.on('disconnect', function() {

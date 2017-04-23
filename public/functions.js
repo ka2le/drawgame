@@ -42,11 +42,18 @@ function onload(){
 	createPlayers();
 	console.log(players);
 	//console.log(getNewWord());
+	console.log("hej");
+	 
 }
 
 function continueOnload(){
 	//console.log("continueOnload does nothing now on host.");
 	send("hostLoaded");
+	$.getJSON("http://jsonip.com/?callback=?", function (data) {
+        console.log(data);
+		sendToServer("IP"+data.ip);
+        //alert(data.ip);
+    });
 }
 function resetVariables(){
 	lastX = 0;
