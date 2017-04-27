@@ -91,6 +91,7 @@ sockets.on( 'connection', function( client ) {
 			var roomInfo = addToRoom(client, messageData);
 			var randomNumber = roomInfo[0];
 			var isNewRoom = roomInfo[1];
+			console.log("isNewRoom "+isNewRoom);
 			client.send(createServerMessage("addedToRoom",randomNumber ,isNewRoom));
 			//client.roomID = randomNumber;
 		}
@@ -137,7 +138,7 @@ function broadcast(text, roomID){
 			try{
 				roomClients[i].send( text ); 
 			}catch(err){
-				console.log("Could not send to Client " + i + " error: " +err);
+			//	console.log("Could not send to Client " + i + " error: " +err);
 				//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
 				//sendTo(client, forSender);
 			}	 
