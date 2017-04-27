@@ -59,13 +59,14 @@ function createRoomID(){
 	return Math.floor(Math.random() * 9999) + 1;
 }
 function findRoom(roomID){
-	var returnValue = -1;
+	//var returnValue = -1;
 	for(var i =0; i<rooms.length; i++){
 		if(rooms[i].roomID == roomID){
-			returnValue = rooms[i];
-			return returnValue;
+			//returnValue = rooms[i];
+			return rooms[i];
 		}
 	}
+	return -1;
 }
 //-------------------------------------------------HSocket Stuff-----------------------------------------------------------------------------------------------------------------------------------------------
 // Listeners
@@ -94,6 +95,7 @@ sockets.on( 'connection', function( client ) {
 			//client.roomID = randomNumber;
 		}
 		if(messageType=="ID"){ 
+			console.log("ID");
 			var theRoom = findRoom(messageData);
 			if(theRoom==-1){
 				client.send(createServerMessage("noSuchID"));
@@ -128,16 +130,21 @@ function broadcast(text, roomID){
 			//sendTo(client, forSender);
 		}	 
     } */
-	var roomClients = findRoom(roomID).clients;
-	for( var i = 0; i < roomClients.length; i++ ) {
-		try{
-			roomClients[i].send( text ); 
-		}catch(err){
-			console.log("Could not send to Client " + i + " error: " +err);
-			//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
-			//sendTo(client, forSender);
-		}	 
-    }
+	var currentRoom = findRoom(roomID);
+	if(currentRoom != -1){
+	 var roomClients =  currentRoom.clients;
+		 for( var i = 0; i < roomClients.length; i++ ) {
+			try{
+				roomClients[i].send( text ); 
+			}catch(err){
+				console.log("Could not send to Client " + i + " error: " +err);
+				//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
+				//sendTo(client, forSender);
+			}	 
+		}
+	}
+	
+	
 }
 function createServerMessage(serverIntent, data, data2){
 			var message = {
