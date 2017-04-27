@@ -79,10 +79,106 @@ function continueOnload(){
 
 function continueOnload2(){
 	$("#joiningDiv").hide();
+	//requestLoginID();
 	console.log("continueOnload2");
 	console.log("Connected to room id "+roomID);
 	iAmReady();
 	
+}
+function requestLoginID(){
+	$("#joinButtons").show();
+	printJoinText("Enter the hosts login id. <br> <br>Failed to connect to game based on WIFI.");
+}
+function printJoinText(text){
+	document.getElementById("joinText").innerHTML = text;
+}
+function joinByID(id){
+	if(id=="input"){
+		id = document.getElementById("joinID").value;
+	}
+	console.log("trying to join room with ID "+id);
+	printJoinText("Connecting...");
+	send("serverTalk", "ID", id);
+}	
+
+//------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
+function iAmReady(){
+	console.log("iAmReady: " +playerNumber);
+	send("iAmReady");
+}
+function handleServerTalk(intent, data, data2){
+	console.log("server wants "+ intent);
+	console.log("data "+data);
+	console.log("data2 "+data2);
+	if(intent=="addedToRoom"){
+		roomID = data;
+		var isNewRoom = data2;
+		if(isNewRoom){
+			requestLoginID();
+		}else{
+			continueOnload2();
+		}
+		
+	}
+	if(intent=="noSuchID"){
+		console.log("Room Not Found");
+		var joinID = data;
+		printJoinText("Failed to join with ID "+joinID);
+	}
+}
+
+
+function handleInput(data){
+	var intent = data.intent;
+	if(intent=="serverTalk"){
+		console.log("serverTalk");
+		handleServerTalk(data.value, data.value2, data.value3);
+	}
+	if(intent=="hostLoaded" && playerNumber != null){
+		started = false;
+		console.log("host loaded");
+		iAmReady();
+	}
+	if(intent=="canvasSize"){
+		canvasSize = data.value;
+		canvasHeight = data.value2;
+		updateCanvasVariables();
+	}
+	if(intent=="startTurn"){
+		if(playerNumber==data.value){
+			startTurn(data.value2);
+			console.log("start");
+		}else{
+			showGuessing();
+		}
+	}
+	if(intent=="correct"){
+		if(yourTurn){
+			showInfo("Player "+ (data.value+1) +" guessed your drawing.");
+			yourTurn = false;
+		}else{
+			if(playerNumber==data.value){
+				showInfo("Congratulations. You got it right!");
+			}else{
+				showInfo("Sorry. Time is up! Player "+ (data.value+1) +" got it right.");
+			}
+		} 
+		
+	}
+	if(intent=="incorrect"){
+		if(playerNumber==data.value){	
+			showWrong();
+		}
+	}
+}
+
+function initReconnect(){
+	toggleMenu();
+	reconnect();
+}
+function handleReconnect(){
+	console.log("handleReconnect");
+	send("reconnect");
 }
 //------------------------------------------------Canvas and other varibales----------------------------------------------------------------------------------------------------------------------------------------------
 function resetVariables(){
@@ -377,81 +473,7 @@ function sendStart(){
 function getNewWord(){
 	send("getNewCard");
 }
-//------------------------------------------------handleInput----------------------------------------------------------------------------------------------------------------------------------------------
-function iAmReady(){
-	console.log("iAmReady: " +playerNumber);
-	send("iAmReady");
-}
-function handleServerTalk(intent, data, data2){
-	console.log("server wants "+ intent);
-	console.log("data "+data);
-	console.log("data2 "+data2);
-	if(intent=="addedToRoom"){
-		roomID = data;
-		var isNewRoom = data2;
-		continueOnload2();
-	}
-	if(intent=="noSuchID"){
-		console.log("Room Not Found");
-	}
-}
-function joinByID(id){
-	console.log("trying to join room with ID "+id);
-	send("serverTalk", "ID", id);
-}
 
-function handleInput(data){
-	var intent = data.intent;
-	if(intent=="serverTalk"){
-		console.log("serverTalk");
-		handleServerTalk(data.value, data.value2, data.value3);
-	}
-	if(intent=="hostLoaded" && playerNumber != null){
-		started = false;
-		console.log("host loaded");
-		iAmReady();
-	}
-	if(intent=="canvasSize"){
-		canvasSize = data.value;
-		canvasHeight = data.value2;
-		updateCanvasVariables();
-	}
-	if(intent=="startTurn"){
-		if(playerNumber==data.value){
-			startTurn(data.value2);
-			console.log("start");
-		}else{
-			showGuessing();
-		}
-	}
-	if(intent=="correct"){
-		if(yourTurn){
-			showInfo("Player "+ (data.value+1) +" guessed your drawing.");
-			yourTurn = false;
-		}else{
-			if(playerNumber==data.value){
-				showInfo("Congratulations. You got it right!");
-			}else{
-				showInfo("Sorry. Time is up! Player "+ (data.value+1) +" got it right.");
-			}
-		} 
-		
-	}
-	if(intent=="incorrect"){
-		if(playerNumber==data.value){	
-			showWrong();
-		}
-	}
-}
-
-function initReconnect(){
-	toggleMenu();
-	reconnect();
-}
-function handleReconnect(){
-	console.log("handleReconnect");
-	send("reconnect");
-}
 
 //------------------------------------------------Jquery inits----------------------------------------------------------------------------------------------------------------------------------------------
 var stepValue = 0;

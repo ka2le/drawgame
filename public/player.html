@@ -17,7 +17,13 @@
  <link href="favicon.ico" rel="icon" type="image/png" />
 </head>
 <body onload="onload()">
-	<div id="joiningDiv">Connecting...</div>
+	<div id="joiningDiv">
+		<div id="joinButtons">
+			<input id="joinID" maxlength="4" class="joinMenu" type="number" size="4">
+			<input type="button" class="joinMenu" onclick="joinByID('input')" value="Join">
+		</div>
+		<label id="joinText"></label>
+	</div>
 	<label onclick="" id="playerNumber" value="0"></label>
 		
 		<div id="sound" >

@@ -6,12 +6,14 @@ body{
 		background: rgb(241,251,255);
 }
 #joiningDiv{
-	width:100vw;
+	width:98vw;
 	font-size:4em;
-	height:100vh;
+	height:98vh;
 	z-index:5000;
 	position:absolute;
 	background-color:white;
 	text-align:center;
+	padding-top: 2vh;
+	padding-left: 2vw;
 	
 }

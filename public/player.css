@@ -326,3 +326,11 @@ box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.15);
 	left:0px;
 
 }
+
+.joinMenu{
+	font-size:1em;
+	max-width:60vw;
+}
+#joinButtons{
+	display:none;
+}

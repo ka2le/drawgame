@@ -98,7 +98,7 @@ sockets.on( 'connection', function( client ) {
 			console.log("ID");
 			var theRoom = findRoom(messageData);
 			if(theRoom==-1){
-				client.send(createServerMessage("noSuchID"));
+				client.send(createServerMessage("noSuchID", messageData));
 			}else{
 				theRoom.clients.push(client)
 				client.send(createServerMessage("addedToRoom",theRoom.roomID, false));
