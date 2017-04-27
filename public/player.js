@@ -1,3 +1,5 @@
+var roomID = -1;
+
 var role = "player";
 var playerNumber;
 var started = false;
@@ -50,6 +52,7 @@ function onload(){
 	startConnection();
 	if(window.location.host=="localhost:4330"){
 		continueOnload();
+		continueOnload2();
 	}
 	//draw();
 	
@@ -57,13 +60,30 @@ function onload(){
 function continueOnload(){
 	//$("#sent").hide();
 	console.log("continueOnload");
-	iAmReady();
+	
 	clearCanvas();
-	send("userCanvas", canvasWidth, canvasHeight);
+	 $(function() {
+		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+		  function(json) {
+			console.log("My public IP address is: ", json.ip);
+			send("serverTalk", "IP", json.ip);
+			//joinByID(30);
+		  }
+		);
+	  });
+	  
+	//send("userCanvas", canvasWidth, canvasHeight);
 	//clearCanvas();
 	//waitForOthers();
 }
 
+function continueOnload2(){
+	$("#joiningDiv").hide();
+	console.log("continueOnload2");
+	console.log("Connected to room id "+roomID);
+	iAmReady();
+	
+}
 //------------------------------------------------Canvas and other varibales----------------------------------------------------------------------------------------------------------------------------------------------
 function resetVariables(){
 	lastX = 0;
@@ -362,9 +382,30 @@ function iAmReady(){
 	console.log("iAmReady: " +playerNumber);
 	send("iAmReady");
 }
+function handleServerTalk(intent, data, data2){
+	console.log("server wants "+ intent);
+	console.log("data "+data);
+	console.log("data2 "+data2);
+	if(intent=="addedToRoom"){
+		roomID = data;
+		var isNewRoom = data2;
+		continueOnload2();
+	}
+	if(intent=="noSuchID"){
+		console.log("Room Not Found");
+	}
+}
+function joinByID(id){
+	console.log("trying to join room with ID "+id);
+	send("serverTalk", "ID", id);
+}
 
 function handleInput(data){
 	var intent = data.intent;
+	if(intent=="serverTalk"){
+		console.log("serverTalk");
+		handleServerTalk(data.value, data.value2, data.value3);
+	}
 	if(intent=="hostLoaded" && playerNumber != null){
 		started = false;
 		console.log("host loaded");

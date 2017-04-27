@@ -59,9 +59,11 @@ function createRoomID(){
 	return Math.floor(Math.random() * 9999) + 1;
 }
 function findRoom(roomID){
+	var returnValue = -1;
 	for(var i =0; i<rooms.length; i++){
 		if(rooms[i].roomID == roomID){
-			return rooms[i];
+			returnValue = rooms[i];
+			return returnValue;
 		}
 	}
 }
@@ -90,6 +92,15 @@ sockets.on( 'connection', function( client ) {
 			var isNewRoom = roomInfo[1];
 			client.send(createServerMessage("addedToRoom",randomNumber ,isNewRoom));
 			//client.roomID = randomNumber;
+		}
+		if(messageType=="ID"){ 
+			var theRoom = findRoom(messageData);
+			if(theRoom==-1){
+				client.send(createServerMessage("noSuchID"));
+			}else{
+				theRoom.clients.push(client)
+				client.send(createServerMessage("addedToRoom",theRoom.roomID, false));
+			} 
 		}
 	}else{
 		var roomID = jsonMessageData.roomID;

@@ -1,3 +1,6 @@
+var roomID = -1;
+
+
 var role = "host";
 var playerNumber = 0;
 var players = [];
@@ -25,7 +28,6 @@ var words = ["apple", "frog", "tree","nose", "cloud", "gun", "motorcycle","straw
  "tank", "lemon", "recycle", "deep", "point", "safe", "download", "speakers", "avocado", "birthday", "dream", "sushi", "dolphin", "owl", "baby", "face", "round", "key", "watch", "mailbox", "saw", "stove", "grill", "rainbow", "pear",
  "mushroom", "sheep", "cake", "shark", "pirate", "trumpet", "coin", "tennis", "fork", "bomb", "map", "glasses", "bear", "airplane", "heart", "moon", "lamp", "balloon", "crab", "cat", "lion", "hamburger", "chair", "candle", "lips", "whale"];
 var currentWord;
-var roomID = -1;
 
 function onload(){
 	//console.log("start");
@@ -57,6 +59,7 @@ function continueOnload(){
       function(json) {
         console.log("My public IP address is: ", json.ip);
 		send("serverTalk", "IP", json.ip);
+		//joinByID(30);
       }
     );
   });
@@ -64,6 +67,7 @@ function continueOnload(){
 }
 function continueOnload2(){
 	send("hostLoaded");
+	$("#joiningDiv").hide();
 }
 function resetVariables(){
 	lastX = 0;
@@ -77,6 +81,125 @@ function resetVariables(){
 	userHeight = canvasHeight;
 	currentPlayerNumber = 0;
 }
+
+//-------------------------------------------------Handle Input-----------------------------------------------------------------------------------------------------------------------------------------------
+function handleServerTalk(intent, data, data2){
+	console.log("server wants "+ intent);
+	console.log("data "+data);
+	console.log("data2 "+data2);
+	if(intent=="addedToRoom"){
+		roomID = data;
+		var isNewRoom = data2;
+		continueOnload2();
+	}
+	if(intent=="noSuchID"){
+		console.log("Room Not Found");
+	}
+}
+function joinByID(id){
+	console.log("trying to join room with ID "+id);
+	send("serverTalk", "ID", id);
+}	
+function handleInput(data){
+	var intent = data.intent;
+	console.log(data);
+	if(intent=="serverTalk"){
+		console.log("serverTalk");
+		handleServerTalk(data.value, data.value2, data.value3);
+	}
+	if(intent=="reconnect" || intent=="iAmReady"){
+		//send("canvasSize", canvasWidth, canvasHeight);
+		var thisplayerNumber = data.playerNumber;
+		activatePlayer(thisplayerNumber);
+		send(turnString, currentPlayerNumber, currentWord);
+	}
+	if(intent=="DrawMessage"){
+		var value = data.value;
+		handleDrawMessage(value);
+		//console.log("drawing");
+	}else{
+		//console.log("intent" + intent);
+		//console.log();
+		if(intent=="start"){
+			flag = true;
+			lastX = translateUserXY(data.value)[0];
+			lastY = translateUserXY(data.value)[1];
+		}
+		if(data.playerNumber == currentPlayerNumber){
+			if(intent=="stop"){
+				flag = false;
+				drawDots = [];
+			}
+			if(intent=="clear"){
+				clearCanvas();
+			}
+			if(intent=="fill"){
+				fillCanvas();
+			}
+			if(intent=="userCanvas"){
+				userWidth = data.value;
+				userHeight = data.value2;
+				canvasWidth = userWidth;
+				canvasHeight = userHeight;
+				updateCanvasVariables();
+				//console.log(userWidth+"<userWidth userHeight>"+userHeight);
+			}
+			if(intent=="changeDrawSize"){
+				changeDrawSize(data.value);
+			}
+			if(intent=="changeDrawColor"){
+				changeDrawColor(data.value);
+			}
+			if(intent=="getNewCard"){
+				redrawWord();
+			}
+			if(intent=="drawImgData"){
+				var oldImgData= data.value;
+				drawImgData(oldImgData);
+				//send("drawImgData", oldImgData);
+			}
+		}
+		if(intent=="guess"){
+			handleGuess(data.value, data.playerNumber); 
+		}
+		if(intent=="startGame"){
+			startGame();
+		}
+		
+	
+	}
+}	
+
+
+function handleReconnect(){
+
+}
+function testValues(){
+	console.log("testValues()");
+	console.log("canvasWidth "+canvasWidth);
+	var xFromPhone = 500;
+	var phoneWidht = 1000;
+	var relation = xFromPhone/phoneWidht;
+	console.log("relation "+relation);
+	var newX = canvasWidth*relation;
+	console.log("newX "+newX);
+}
+function handleDrawMessage(message){
+	currX = translateUserXY(message)[0];
+	currY = translateUserXY(message)[1];
+	draw();
+}
+function translateUserXY(text){
+	var inputX = parseInt(text.substring(0, 4));
+	var inputY = parseInt(text.substring(4, 8));
+	
+	var newX = (inputX/userWidth)*canvasWidth;
+	var newY = (inputY/userHeight)*canvasHeight;
+	//console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
+	return [newX,newY];
+}
+
+
 //------------------------------------------------Player stuff----------------------------------------------------------------------------------------------------------------------------------------------
 function createPlayers(){
 	for(var i = 0; i<4; i++){
@@ -274,115 +397,6 @@ function findxy(res, e) {
         }
     }
 
-//-------------------------------------------------Handle Input-----------------------------------------------------------------------------------------------------------------------------------------------
-function handleServerTalk(intent, data, data2){
-	console.log("server wants "+ intent);
-	console.log("data "+data);
-	console.log("data2 "+data2);
-	if(intent=="addedToRoom"){
-		roomID = data;
-		var isNewRoom = data2;
-		continueOnload2();
-	}
-}	
-function handleInput(data){
-	var intent = data.intent;
-	console.log(data);
-	if(intent=="serverTalk"){
-		console.log("serverTalk");
-		handleServerTalk(data.value, data.value2, data.value3);
-	}
-	if(intent=="reconnect" || intent=="iAmReady"){
-		//send("canvasSize", canvasWidth, canvasHeight);
-		var thisplayerNumber = data.playerNumber;
-		activatePlayer(thisplayerNumber);
-		send(turnString, currentPlayerNumber, currentWord);
-	}
-	if(intent=="DrawMessage"){
-		var value = data.value;
-		handleDrawMessage(value);
-		//console.log("drawing");
-	}else{
-		//console.log("intent" + intent);
-		//console.log();
-		if(intent=="start"){
-			flag = true;
-			lastX = translateUserXY(data.value)[0];
-			lastY = translateUserXY(data.value)[1];
-		}
-		if(data.playerNumber == currentPlayerNumber){
-			if(intent=="stop"){
-				flag = false;
-				drawDots = [];
-			}
-			if(intent=="clear"){
-				clearCanvas();
-			}
-			if(intent=="fill"){
-				fillCanvas();
-			}
-			if(intent=="userCanvas"){
-				userWidth = data.value;
-				userHeight = data.value2;
-				canvasWidth = userWidth;
-				canvasHeight = userHeight;
-				updateCanvasVariables();
-				//console.log(userWidth+"<userWidth userHeight>"+userHeight);
-			}
-			if(intent=="changeDrawSize"){
-				changeDrawSize(data.value);
-			}
-			if(intent=="changeDrawColor"){
-				changeDrawColor(data.value);
-			}
-			if(intent=="getNewCard"){
-				redrawWord();
-			}
-			if(intent=="drawImgData"){
-				var oldImgData= data.value;
-				drawImgData(oldImgData);
-				//send("drawImgData", oldImgData);
-			}
-		}
-		if(intent=="guess"){
-			handleGuess(data.value, data.playerNumber); 
-		}
-		if(intent=="startGame"){
-			startGame();
-		}
-		
-	
-	}
-}	
-
-
-function handleReconnect(){
-
-}
-function testValues(){
-	console.log("testValues()");
-	console.log("canvasWidth "+canvasWidth);
-	var xFromPhone = 500;
-	var phoneWidht = 1000;
-	var relation = xFromPhone/phoneWidht;
-	console.log("relation "+relation);
-	var newX = canvasWidth*relation;
-	console.log("newX "+newX);
-}
-function handleDrawMessage(message){
-	currX = translateUserXY(message)[0];
-	currY = translateUserXY(message)[1];
-	draw();
-}
-function translateUserXY(text){
-	var inputX = parseInt(text.substring(0, 4));
-	var inputY = parseInt(text.substring(4, 8));
-	
-	var newX = (inputX/userWidth)*canvasWidth;
-	var newY = (inputY/userHeight)*canvasHeight;
-	//console.log(userHeight+"<userH canvasH>"+canvasHeight+" givse " +newY+" from "+inputY);
-	return [newX,newY];
-}
 //------------------------------------------------SendFunction for player code----------------------------------------------------------------------------------------------------------------------------------------------
 function sendCurrentXY(){
 	var value = addZeroes(currX)+""+addZeroes(currY);
