@@ -430,7 +430,12 @@ function drawImgData(imgData){
 		ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 	};
 }
-
+function syncWithHost(){
+	clearCanvas();
+	send("userCanvas", canvasWidth, canvasHeight);
+	send("changeDrawColor",drawColor );
+	send("changeDrawSize", lineWidth);
+}
 //------------------------------------------------Turn Stuff----------------------------------------------------------------------------------------------------------------------------------------------
 var yourWord ="";
 var yourTurn = false;
@@ -440,6 +445,7 @@ function startTurn(word){
 	$("#waitingDiv").hide();
 	$("#guessContainer").hide();
 	yourTurn = true;
+	syncWithHost();
 	if(word==yourWord){
 		console.log("I know");
 	}else{
