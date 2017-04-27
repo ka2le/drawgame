@@ -194,9 +194,22 @@ input[type=checkbox]
 	color:black;
 	display:none;
 }
+#roomID{
+	position:absolute;
+	z-index:21;
+	width:100vw;
+	font-weight:bold;
+	right:15vw;
+	font-size:3em;
+	top:2vh;
+	text-align:right;
+	color:black;
+	//display:none;
+}
 
 #testButtons{
 	position:absolute;
+	bottom:5vh;
 	z-index:10;
 	//display:none;
 

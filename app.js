@@ -105,6 +105,11 @@ sockets.on( 'connection', function( client ) {
 				client.send(createServerMessage("addedToRoom",theRoom.roomID, false));
 			} 
 		}
+		if(messageType=="resetRooms"){ 
+			console.log("resetting rooms");
+			rooms = [];
+			client.send(createServerMessage("roomsCleared"));
+		}
 	}else{
 		var roomID = jsonMessageData.roomID;
 		broadcast(message, roomID);

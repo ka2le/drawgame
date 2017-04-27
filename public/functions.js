@@ -47,6 +47,7 @@ function onload(){
 	//console.log(getNewWord());
 	if(window.location.host=="localhost:4330"){
 		continueOnload();
+		continueOnload2();
 	}
 	 
 }
@@ -68,6 +69,7 @@ function continueOnload(){
 function continueOnload2(){
 	send("hostLoaded");
 	$("#joiningDiv").hide();
+	document.getElementById("roomID").innerHTML = "Room ID: "+ roomID;
 }
 function resetVariables(){
 	lastX = 0;
@@ -497,4 +499,8 @@ function testplayerJoin(playerId){
 	  playerNumber: playerId
     };
 	handleInput(message);
+}
+function removeAllRooms(){
+
+ send("serverTalk", "resetRooms");
 }
