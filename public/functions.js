@@ -28,6 +28,7 @@ var words = ["apple", "frog", "tree","nose", "cloud", "gun", "motorcycle","straw
  "tank", "lemon", "recycle", "deep", "point", "safe", "download", "speakers", "avocado", "birthday", "dream", "sushi", "dolphin", "owl", "baby", "face", "round", "key", "watch", "mailbox", "saw", "stove", "grill", "rainbow", "pear",
  "mushroom", "sheep", "cake", "shark", "pirate", "trumpet", "coin", "tennis", "fork", "bomb", "map", "glasses", "bear", "airplane", "heart", "moon", "lamp", "balloon", "crab", "cat", "lion", "hamburger", "chair", "candle", "lips", "whale"];
 var currentWord;
+var finishedLoaded = false;
 
 function onload(){
 	//console.log("start");
@@ -67,6 +68,7 @@ function continueOnload(){
   
 }
 function continueOnload2(){
+	finishedLoaded = true;
 	send("hostLoaded");
 	$("#joiningDiv").hide();
 	document.getElementById("roomID").innerHTML = "Room ID: "+ roomID;
@@ -89,13 +91,17 @@ function handleServerTalk(intent, data, data2){
 	console.log("server wants "+ intent);
 	console.log("data "+data);
 	console.log("data2 "+data2);
-	if(intent=="addedToRoom"){
-		roomID = data;
-		var isNewRoom = data2;
-		continueOnload2();
-	}
-	if(intent=="noSuchID"){
-		console.log("Room Not Found");
+	if(finishedLoaded){
+		console.log("I am loaded");
+	}else{
+		if(intent=="addedToRoom"){
+			roomID = data;
+			var isNewRoom = data2;
+			continueOnload2();
+		}
+		if(intent=="noSuchID"){
+			console.log("Room Not Found");
+		}
 	}
 }
 function joinByID(id){
@@ -174,7 +180,7 @@ function handleInput(data){
 
 
 function handleReconnect(){
-
+	 joinByID(roomID);
 }
 function testValues(){
 	console.log("testValues()");

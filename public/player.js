@@ -21,7 +21,7 @@ var howMuchRedo = 30;
 var paletteColor = "white"
 var androidOffset = false;
 var roomID = -1;
-
+var finishedLoaded = false;
 
 function onload(){
 	var url = window.location.href;
@@ -83,7 +83,7 @@ function continueOnload2(){
 	console.log("continueOnload2");
 	console.log("Connected to room id "+roomID);
 	iAmReady();
-	
+	finishedLoaded =true;
 }
 function requestLoginID(){
 	$("#joinButtons").show();
@@ -110,21 +110,30 @@ function handleServerTalk(intent, data, data2){
 	console.log("server wants "+ intent);
 	console.log("data "+data);
 	console.log("data2 "+data2);
-	if(intent=="addedToRoom"){
-		roomID = data;
-		var isNewRoom = data2;
-		if(isNewRoom){
-			requestLoginID();
-		}else{
-			continueOnload2();
+	if(finishedLoaded){
+		console.log("I am loaded");
+		if(intent=="addedToRoom"){
+			console.log("reconnecting to host");
+			send("reconnect");
 		}
-		
+	}else{
+		if(intent=="addedToRoom"){
+			roomID = data;
+			var isNewRoom = data2;
+			if(isNewRoom){
+				requestLoginID();
+			}else{
+				continueOnload2();
+			}
+			
+		}
+		if(intent=="noSuchID"){
+			console.log("Room Not Found");
+			var joinID = data;
+			printJoinText("Failed to join with ID "+joinID);
+		}
 	}
-	if(intent=="noSuchID"){
-		console.log("Room Not Found");
-		var joinID = data;
-		printJoinText("Failed to join with ID "+joinID);
-	}
+	
 }
 
 
@@ -178,7 +187,9 @@ function initReconnect(){
 }
 function handleReconnect(){
 	console.log("handleReconnect");
-	send("reconnect");
+	joinByID(roomID);
+	//send("reconnect");
+	//
 }
 //------------------------------------------------Canvas and other varibales----------------------------------------------------------------------------------------------------------------------------------------------
 function resetVariables(){
