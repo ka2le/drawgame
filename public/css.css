@@ -211,6 +211,6 @@ input[type=checkbox]
 	position:absolute;
 	bottom:5vh;
 	z-index:10;
-	//display:none;
+	display:none;
 
 }
